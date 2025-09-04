@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedClub - Aspiring Medical Professionals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-color: #f0f8ff; /* Lighter sky blue */
+        }
+        .section-title {
+            font-weight: 800;
+            font-size: 2.25rem; /* 36px */
+            letter-spacing: -0.025em;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #0ea5e9, #22d3ee); /* sky-500 to cyan-400 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0ea5e9;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-900">
+                 <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+                 <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-gray-600 hover:text-sky-500 transition duration-300">About Us</a>
+                <a href="#offerings" class="text-gray-600 hover:text-sky-500 transition duration-300">What We Offer</a>
+                <a href="#events" class="text-gray-600 hover:text-sky-500 transition duration-300">Events</a>
+                <a href="#team" class="text-gray-600 hover:text-sky-500 transition duration-300">Our Team</a>
+                <a href="#shop" class="text-gray-600 hover:text-sky-500 transition duration-300">Shop</a>
+            </div>
+            <a href="#join" class="bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-sky-500">About Us</a>
+            <a href="#offerings" class="block py-2 text-gray-600 hover:text-sky-500">What We Offer</a>
+            <a href="#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
+            <a href="#team" class="block py-2 text-gray-600 hover:text-sky-500">Our Team</a>
+            <a href="#shop" class="block py-2 text-gray-600 hover:text-sky-500">Shop</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero-bg">
+            <div class="container mx-auto px-6 py-20 md:py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                    Shaping the Future of <span class="gradient-text">Medicine, Together</span>.
+                </h1>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire the next generation of healthcare leaders.
+                </p>
+                <a href="#join" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition duration-300 shadow-xl inline-block">Become a Member</a>
+            </div>
+        </section>
+
+        <!-- About Us Section -->
+        <section id="about" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="flex flex-col md:flex-row items-center gap-12">
+                    <div class="md:w-1/2">
+                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=Our+Mission" alt="Group of students" class="rounded-2xl shadow-lg w-full">
+                    </div>
+                    <div class="md:w-1/2">
+                        <h2 class="section-title text-gray-900 mb-4">About MedClub</h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            Founded in 2023, MedClub is a student-led organization dedicated to fostering a collaborative environment for individuals passionate about a career in medicine. We aim to provide valuable resources, support, and opportunities to help our members succeed on their journey to becoming healthcare professionals.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Our core mission is to bridge the gap between academic learning and practical application. We believe in the power of community and mentorship to empower our members with the knowledge, skills, and confidence needed to excel in the competitive and ever-evolving field of medicine.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- What We Offer Section -->
+        <section id="offerings" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title text-gray-900 mb-12">What We Offer</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-network-wired"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Networking Events</h3>
+                        <p class="text-gray-600">Connect with peers, alumni, and established medical professionals. Build relationships that will last a lifetime.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-chalkboard-teacher"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Skill Workshops</h3>
+                        <p class="text-gray-600">Participate in hands-on workshops, from suturing clinics to MCAT prep sessions, designed to give you an edge.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-user-md"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Mentorship Program</h3>
+                        <p class="text-gray-600">Get paired with experienced mentors who can provide guidance, support, and invaluable advice for your career path.</p>
+                    </div>
+                     <!-- Feature 4 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-comments"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Guest Speaker Series</h3>
+                        <p class="text-gray-600">Learn from leading physicians, researchers, and healthcare innovators sharing their experiences and insights.</p>
+                    </div>
+                     <!-- Feature 5 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-hand-holding-heart"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Volunteer Opportunities</h3>
+                        <p class="text-gray-600">Engage in meaningful community service and gain clinical experience through our partnered volunteer programs.</p>
+                    </div>
+                     <!-- Feature 6 -->
+                    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-sky-500 text-4xl mb-4"><i class="fas fa-book-medical"></i></div>
+                        <h3 class="text-xl font-bold mb-2">Resource Library</h3>
+                        <p class="text-gray-600">Access a curated library of study guides, research papers, and application resources exclusively for members.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Events Section -->
+        <section id="events" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="section-title text-gray-900 text-center mb-12">Upcoming Events</h2>
+                <div class="space-y-8">
+                    <!-- Event 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 overflow-hidden">
+                         <div class="bg-sky-100 text-sky-600 p-4 rounded-lg text-center w-full md:w-auto">
+                            <p class="text-xl font-bold">SEP</p>
+                            <p class="text-4xl font-extrabold">15</p>
+                         </div>
+                         <div class="flex-grow">
+                             <h3 class="text-xl font-bold text-gray-900">Annual Welcome Mixer</h3>
+                             <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>University Grand Hall</p>
+                             <p class="text-gray-600"><i class="fas fa-clock mr-2"></i>6:00 PM - 8:00 PM</p>
+                         </div>
+                         <a href="#" class="bg-sky-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-sky-600 transition duration-300 w-full md:w-auto text-center">RSVP</a>
+                    </div>
+                    <!-- Event 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 overflow-hidden">
+                         <div class="bg-sky-100 text-sky-600 p-4 rounded-lg text-center w-full md:w-auto">
+                            <p class="text-xl font-bold">OCT</p>
+                            <p class="text-4xl font-extrabold">04</p>
+                         </div>
+                         <div class="flex-grow">
+                             <h3 class="text-xl font-bold text-gray-900">Suturing Workshop with Dr. Anya Sharma</h3>
+                             <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>Medical Sciences Building, Room 201</p>
+                             <p class="text-gray-600"><i class="fas fa-clock mr-2"></i>1:00 PM - 3:00 PM</p>
+                         </div>
+                         <a href="#" class="bg-sky-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-sky-600 transition duration-300 w-full md:w-auto text-center">Register Now</a>
+                    </div>
+                    <!-- Event 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 overflow-hidden">
+                         <div class="bg-sky-100 text-sky-600 p-4 rounded-lg text-center w-full md:w-auto">
+                            <p class="text-xl font-bold">NOV</p>
+                            <p class="text-4xl font-extrabold">10</p>
+                         </div>
+                         <div class="flex-grow">
+                             <h3 class="text-xl font-bold text-gray-900">Guest Speaker: A Day in the Life of a Surgeon</h3>
+                             <p class="text-gray-600"><i class="fas fa-map-marker-alt mr-2"></i>Online Webinar (Zoom)</p>
+                             <p class="text-gray-600"><i class="fas fa-clock mr-2"></i>7:00 PM</p>
+                         </div>
+                         <a href="#" class="bg-gray-200 text-gray-600 font-semibold px-6 py-2 rounded-lg cursor-not-allowed w-full md:w-auto text-center">Details Soon</a>
+                    </div>
+                </div>
+
+                <!-- Gemini Event Idea Generator -->
+                <div class="mt-20 text-center bg-sky-50 p-10 rounded-2xl shadow-inner">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Need Inspiration for Our Next Event?</h3>
+                    <p class="text-gray-600 mb-6 max-w-2xl mx-auto">Let our AI assistant brainstorm some ideas for the club!</p>
+                    <button id="generate-ideas-btn" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition duration-300 shadow-md">
+                        ✨ Generate Event Ideas
+                    </button>
+                    <div id="ideas-loader" class="hidden mx-auto mt-6">
+                        <div class="loader"></div>
+                    </div>
+                    <div id="ideas-container" class="mt-8 text-left max-w-4xl mx-auto"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Meet the Team Section -->
+        <section id="team" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title text-gray-900 mb-12">Meet the Leadership Team</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <!-- Team Member 1 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                        <img src="https://placehold.co/200x200/A7F3D0/15803D?text=JD" alt="Team Member 1" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-sky-200">
+                        <h3 class="text-xl font-bold">Jane Doe</h3>
+                        <p class="text-sky-500 font-semibold">President</p>
+                    </div>
+                    <!-- Team Member 2 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                        <img src="https://placehold.co/200x200/BAE6FD/0C4A6E?text=JS" alt="Team Member 2" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-sky-200">
+                        <h3 class="text-xl font-bold">John Smith</h3>
+                        <p class="text-sky-500 font-semibold">Vice President</p>
+                    </div>
+                    <!-- Team Member 3 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                        <img src="https://placehold.co/200x200/FBCFE8/831843?text=ES" alt="Team Member 3" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-sky-200">
+                        <h3 class="text-xl font-bold">Emily Stone</h3>
+                        <p class="text-sky-500 font-semibold">Secretary</p>
+                    </div>
+                    <!-- Team Member 4 -->
+                    <div class="bg-white p-6 rounded-2xl shadow-md text-center">
+                        <img src="https://placehold.co/200x200/F5D0A9/78350F?text=MK" alt="Team Member 4" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-sky-200">
+                        <h3 class="text-xl font-bold">Michael Khan</h3>
+                        <p class="text-sky-500 font-semibold">Treasurer</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shop Section -->
+        <section id="shop" class="py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="section-title text-gray-900 mb-12">Club Merchandise</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Product 1 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=MedClub+T-Shirt" alt="MedClub T-Shirt" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
+                            <p class="text-2xl font-bold gradient-text mb-4">$25.00</p>
+                            <button onclick="purchaseItem('MedClub T-Shirt', '25.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
+                        </div>
+                    </div>
+                    <!-- Product 2 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=MedClub+Mug" alt="MedClub Mug" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub Coffee Mug</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">Start your day with this sturdy ceramic mug, perfect for late-night study sessions.</p>
+                            <p class="text-2xl font-bold gradient-text mb-4">$15.00</p>
+                            <button onclick="purchaseItem('MedClub Coffee Mug', '15.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
+                        </div>
+                    </div>
+                    <!-- Product 3 -->
+                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
+                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=Stethoscope" alt="Stethoscope" class="w-full h-56 object-cover">
+                        <div class="p-6 flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold mb-2 text-gray-900">Professional Stethoscope</h3>
+                            <p class="text-gray-600 mb-4 flex-grow">A reliable, high-quality stethoscope for clinical practice. Recommended for all members.</p>
+                            <p class="text-2xl font-bold gradient-text mb-4">$75.00</p>
+                            <button onclick="purchaseItem('Professional Stethoscope', '75.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
+                        </div>
+                    </div>
+                </div>
+                 <div class="mt-12 bg-gray-50 p-6 rounded-2xl shadow-inner">
+                    <h4 class="text-lg font-semibold text-gray-800">How to Order:</h4>
+                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
+                        Clicking "Buy Now" will open your default email client with a pre-filled order request. Simply send the email to place your order. We will reply with payment instructions and delivery details.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Join Us Section -->
+        <section id="join" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="bg-gradient-to-r from-sky-500 to-cyan-400 text-white rounded-2xl p-10 md:p-16 flex flex-col lg:flex-row items-center gap-10 shadow-2xl">
+                    <div class="lg:w-1/2 text-center lg:text-left">
+                        <h2 class="text-4xl font-extrabold mb-4">Ready to Join MedClub?</h2>
+                        <p class="text-sky-100 text-lg mb-6">
+                            Take the next step in your medical journey. Fill out the form to get in touch with our membership coordinator and learn how to become a part of our thriving community.
+                        </p>
+                    </div>
+                    <div class="lg:w-1/2 w-full">
+                        <form id="join-form" class="bg-white p-8 rounded-xl shadow-lg w-full">
+                            <div id="form-content">
+                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Membership Inquiry</h3>
+                                <div class="mb-4">
+                                    <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                                    <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="email" class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                </div>
+                                <div class="mb-6">
+                                    <label for="message" class="block text-gray-700 font-semibold mb-2">Message (Optional)</label>
+                                    <textarea id="message" name="message" rows="3" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition duration-300">Send Inquiry</button>
+                            </div>
+                            <div id="form-success" class="hidden text-center text-gray-900">
+                                <div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div>
+                                <h3 class="text-2xl font-bold mb-2">Inquiry Sent!</h3>
+                                <p>We've received your message and are excited to connect. A member of our team will get back to you shortly!</p>
+                                <div class="mt-6">
+                                    <button id="welcome-message-btn" class="bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-cyan-600 transition duration-300">
+                                        ✨ Get Your Personalized Welcome
+                                    </button>
+                                    <div id="welcome-loader" class="hidden mx-auto mt-4"><div class="loader !w-6 !h-6"></div></div>
+                                    <div id="welcome-message-container" class="mt-4 p-4 bg-cyan-50 rounded-lg text-cyan-800 text-sm"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div>
+                    <a href="#" class="text-2xl font-bold">
+                       <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+                       <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
+                    </a>
+                    <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <p class="font-semibold mb-2">Follow Us</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-500">
+                &copy; <span id="year"></span> MedClub. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                if(mobileMenu.classList.contains('hidden') === false){
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // --- Gemini API Integration ---
+        const apiKey = ""; // Leave as-is, will be handled by the environment
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        // Feature 1: Event Idea Generator
+        const generateIdeasBtn = document.getElementById('generate-ideas-btn');
+        const ideasLoader = document.getElementById('ideas-loader');
+        const ideasContainer = document.getElementById('ideas-container');
+
+        generateIdeasBtn.addEventListener('click', async () => {
+            ideasLoader.classList.remove('hidden');
+            ideasContainer.innerHTML = '';
+            generateIdeasBtn.disabled = true;
+
+            const prompt = "You are the creative director for a university's medical student club (MedClub). Brainstorm 5 unique and engaging event ideas for our members. The ideas should be a mix of academic, social, and skill-building activities. For each idea, provide a catchy title and a one-sentence description. Format the output as a numbered list with bold titles (e.g., '1. **Title:** Description').";
+            
+            try {
+                const response = await callGemini(prompt);
+                const formattedHtml = formatEventIdeas(response);
+                ideasContainer.innerHTML = formattedHtml;
+            } catch (error) {
+                console.error("Error generating event ideas:", error);
+                ideasContainer.innerHTML = '<p class="text-red-500">Sorry, we couldn\'t generate ideas at this moment. Please try again later.</p>';
+            } finally {
+                ideasLoader.classList.add('hidden');
+                generateIdeasBtn.disabled = false;
+            }
+        });
+        
+        function formatEventIdeas(text) {
+            const ideas = text.split('\n').filter(line => line.trim().length > 0);
+            let html = '<div class="space-y-4">';
+            ideas.forEach(idea => {
+                const match = idea.match(/\d+\.\s*\*\*(.*?)\*\*:\s*(.*)/);
+                if (match) {
+                    const title = match[1];
+                    const description = match[2];
+                    html += `<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-sky-400">
+                                <h4 class="font-bold text-lg text-gray-800">${title}</h4>
+                                <p class="text-gray-600">${description}</p>
+                             </div>`;
+                }
+            });
+            html += '</div>';
+            return html;
+        }
+
+        // Feature 2: Personalized Welcome Message
+        const joinForm = document.getElementById('join-form');
+        const formContent = document.getElementById('form-content');
+        const formSuccess = document.getElementById('form-success');
+        const welcomeBtn = document.getElementById('welcome-message-btn');
+        const welcomeLoader = document.getElementById('welcome-loader');
+        const welcomeContainer = document.getElementById('welcome-message-container');
+
+        joinForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // Stop the form from reloading the page
+            
+            // Get user's name to use in the success message and AI prompt
+            const userName = document.getElementById('name').value;
+            const userEmail = document.getElementById('email').value;
+            const userMessage = document.getElementById('message').value;
+
+            // Construct the mailto link to open the user's email client
+            const recipientEmail = 'medclubfmpa@gmail.com';
+            const subject = `MedClub Membership Inquiry from ${userName}`;
+            const body = `Hello MedClub Team,\n\nA new inquiry has been submitted through the website.\n\nName: ${userName}\nEmail: ${userEmail}\n\nMessage:\n${userMessage}\n\n---`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Open the email client
+            window.location.href = mailtoLink;
+            
+            // Now, show the success message on the webpage
+            formContent.classList.add('hidden');
+            formSuccess.classList.remove('hidden');
+            welcomeContainer.innerHTML = ''; // Clear any previous welcome message
+            
+            // Set up the button for the AI welcome message
+            welcomeBtn.onclick = () => generateWelcomeMessage(userName);
+        });
+
+        async function generateWelcomeMessage(name) {
+            welcomeLoader.classList.remove('hidden');
+            welcomeContainer.innerHTML = '';
+            welcomeBtn.disabled = true;
+
+            const prompt = `You are the friendly president of MedClub, a university club for aspiring medical professionals. A new member named ${name} has just shown interest. Write a short, enthusiastic, and welcoming paragraph (2-3 sentences) to them. Mention one of the club's benefits, like our mentorship program or hands-on skill workshops.`;
+            
+            try {
+                const response = await callGemini(prompt);
+                welcomeContainer.innerHTML = `<p>${response}</p>`;
+            } catch (error) {
+                console.error("Error generating welcome message:", error);
+                welcomeContainer.innerHTML = '<p class="text-red-500">Sorry, could not generate a message right now.</p>';
+            } finally {
+                welcomeLoader.classList.add('hidden');
+                welcomeBtn.disabled = false;
+            }
+        }
+
+        // Reusable Gemini API call function
+        async function callGemini(promptText) {
+            const payload = {
+                contents: [{
+                    parts: [{ text: promptText }]
+                }]
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API call failed with status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error("Invalid response structure from API.");
+            }
+        }
+
+        // Shop purchase handling
+        function purchaseItem(itemName, itemPrice) {
+            const recipientEmail = 'medclubfmpa@gmail.com';
+            const subject = `MedClub Shop Order: ${itemName}`;
+            const body = `Hello MedClub Team,\n\nI would like to purchase the following item:\n\nProduct: ${itemName}\nPrice: $${itemPrice}\n\nPlease let me know the next steps for payment and delivery.\n\nThank you,\n[Your Name]`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        }
+
+    </script>
+</body>
+</html>
+
