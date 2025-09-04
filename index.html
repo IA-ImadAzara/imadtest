@@ -89,8 +89,8 @@
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="text-2xl font-bold text-gray-900">
-                 <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
-                 <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
+                  <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+                  <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
             </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="text-gray-600 hover:text-sky-500 transition duration-300">About Us</a>
@@ -330,7 +330,7 @@
                     <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
                         Clicking "Buy Now" will open your default email client with a pre-filled order request. Simply send the email to place your order. We will reply with payment instructions and delivery details.
                     </p>
-                </div>
+                 </div>
             </div>
         </section>
 
@@ -345,9 +345,14 @@
                         </p>
                     </div>
                     <div class="lg:w-1/2 w-full">
-                        <form id="join-form" class="bg-white p-8 rounded-xl shadow-lg w-full">
+                        <form id="join-form" action="https://api.web3forms.com/submit" method="POST" class="bg-white p-8 rounded-xl shadow-lg w-full">
                             <div id="form-content">
                                 <h3 class="text-2xl font-bold text-gray-900 mb-6">Membership Inquiry</h3>
+                                <!-- IMPORTANT: Replace with your Access Key -->
+                                <input type="hidden" name="access_key" value="4cd273b2-ad89-4328-a122-995acc03957e">
+                                <input type="hidden" name="subject" value="New MedClub Membership Inquiry">
+                                <input type="hidden" name="from_name" value="MedClub Website">
+                                
                                 <div class="mb-4">
                                     <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
                                     <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
@@ -388,8 +393,8 @@
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div>
                     <a href="#" class="text-2xl font-bold">
-                       <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
-                       <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
+                        <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+                        <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
                     </a>
                     <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
                 </div>
@@ -437,6 +442,22 @@
         const apiKey = ""; // Leave as-is, will be handled by the environment
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
+        // Generic function to call Gemini API
+        async function callGemini(prompt) {
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            return data.candidates[0].content.parts[0].text;
+        }
+
         // Feature 1: Event Idea Generator
         const generateIdeasBtn = document.getElementById('generate-ideas-btn');
         const ideasLoader = document.getElementById('ideas-loader');
@@ -480,7 +501,7 @@
             return html;
         }
 
-        // Feature 2: Personalized Welcome Message
+        // Feature 2: Personalized Welcome Message & Direct Form Submission
         const joinForm = document.getElementById('join-form');
         const formContent = document.getElementById('form-content');
         const formSuccess = document.getElementById('form-success');
@@ -489,81 +510,73 @@
         const welcomeContainer = document.getElementById('welcome-message-container');
 
         joinForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // Stop the form from reloading the page
+            e.preventDefault();
             
-            // Get user's name to use in the success message and AI prompt
-            const userName = document.getElementById('name').value;
-            const userEmail = document.getElementById('email').value;
-            const userMessage = document.getElementById('message').value;
+            const submitButton = joinForm.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
-            // Construct the mailto link to open the user's email client
-            const recipientEmail = 'imadazara04@gmail.com';
-            const subject = `MedClub Membership Inquiry from ${userName}`;
-            const body = `Hello MedClub Team,\n\nA new inquiry has been submitted through the website.\n\nName: ${userName}\nEmail: ${userEmail}\n\nMessage:\n${userMessage}\n\n---`;
-            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Open the email client
-            window.location.href = mailtoLink;
-            
-            // Now, show the success message on the webpage
-            formContent.classList.add('hidden');
-            formSuccess.classList.remove('hidden');
-            welcomeContainer.innerHTML = ''; // Clear any previous welcome message
-            
-            // Set up the button for the AI welcome message
-            welcomeBtn.onclick = () => generateWelcomeMessage(userName);
+            const formData = new FormData(joinForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            })
+            .then(async (response) => {
+                let jsonResponse = await response.json();
+                if (response.status == 200) {
+                    formContent.classList.add('hidden');
+                    formSuccess.classList.remove('hidden');
+                    welcomeContainer.innerHTML = ''; 
+                } else {
+                    console.log(response);
+                    alert(`Error: ${jsonResponse.message}`);
+                }
+            })
+            .catch(error => {
+                console.log(error);
+                alert("An error occurred. Please try again later.");
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+                joinForm.reset();
+            });
         });
 
-        async function generateWelcomeMessage(name) {
+
+        welcomeBtn.addEventListener('click', async () => {
             welcomeLoader.classList.remove('hidden');
             welcomeContainer.innerHTML = '';
             welcomeBtn.disabled = true;
 
-            const prompt = `You are the friendly president of MedClub, a university club for aspiring medical professionals. A new member named ${name} has just shown interest. Write a short, enthusiastic, and welcoming paragraph (2-3 sentences) to them. Mention one of the club's benefits, like our mentorship program or hands-on skill workshops.`;
+            const userName = document.getElementById('name').value || "future member"; // This will be empty now, but we'll leave the logic
+            const prompt = `You are the enthusiastic president of MedClub. Write a short (around 30-40 words), warm, and welcoming message for a new prospective member. Express excitement about them joining the community.`;
             
             try {
                 const response = await callGemini(prompt);
-                welcomeContainer.innerHTML = `<p>${response}</p>`;
+                welcomeContainer.textContent = response;
             } catch (error) {
                 console.error("Error generating welcome message:", error);
-                welcomeContainer.innerHTML = '<p class="text-red-500">Sorry, could not generate a message right now.</p>';
+                welcomeContainer.textContent = "We're so excited you're interested in joining! We can't wait to see you at our next event.";
             } finally {
                 welcomeLoader.classList.add('hidden');
                 welcomeBtn.disabled = false;
             }
-        }
-
-        // Reusable Gemini API call function
-        async function callGemini(promptText) {
-            const payload = {
-                contents: [{
-                    parts: [{ text: promptText }]
-                }]
-            };
-
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`API call failed with status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts[0].text) {
-                return result.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error("Invalid response structure from API.");
-            }
-        }
-
-        // Shop purchase handling
+        });
+        
+        // Shop Section: Purchase Item
         function purchaseItem(itemName, itemPrice) {
-            const recipientEmail = 'medclubfmpa@gmail.com';
-            const subject = `MedClub Shop Order: ${itemName}`;
-            const body = `Hello MedClub Team,\n\nI would like to purchase the following item:\n\nProduct: ${itemName}\nPrice: $${itemPrice}\n\nPlease let me know the next steps for payment and delivery.\n\nThank you,\n[Your Name]`;
+            const recipientEmail = 'imad.azara@edu.uiz.ac.ma';
+            const subject = `Purchase Order: ${itemName}`;
+            const body = `Hello MedClub,\n\nI would like to purchase the following item:\n\n- Product: ${itemName}\n- Price: $${itemPrice}\n\nPlease provide me with payment and pickup information.\n\nThank you!`;
             const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailtoLink;
         }
