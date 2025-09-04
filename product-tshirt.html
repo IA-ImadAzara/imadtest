@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedClub T-Shirt - MedClub Shop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #0ea5e9, #22d3ee); /* sky-500 to cyan-400 */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">
+                  <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="text-gray-600 hover:text-sky-500 transition duration-300">About Us</a>
+                <a href="index.html#offerings" class="text-gray-600 hover:text-sky-500 transition duration-300">What We Offer</a>
+                <a href="index.html#events" class="text-gray-600 hover:text-sky-500 transition duration-300">Events</a>
+                <a href="index.html#team" class="text-gray-600 hover:text-sky-500 transition duration-300">Our Team</a>
+                <a href="shop.html" class="text-sky-500 font-semibold transition duration-300">Shop</a>
+            </div>
+            <a href="index.html#join" class="bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-sky-500">About Us</a>
+            <a href="index.html#offerings" class="block py-2 text-gray-600 hover:text-sky-500">What We Offer</a>
+            <a href="index.html#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
+            <a href="index.html#team" class="block py-2 text-gray-600 hover:text-sky-500">Our Team</a>
+            <a href="shop.html" class="block py-2 text-sky-500 font-semibold">Shop</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Product Details Section -->
+        <section id="product" class="py-20">
+            <div class="container mx-auto px-6">
+                <div class="bg-white p-8 rounded-2xl shadow-lg md:grid md:grid-cols-2 md:gap-12">
+                    <!-- Product Image -->
+                    <div class="mb-8 md:mb-0">
+                        <img src="https://placehold.co/600x600/E0F2FE/0EA5E9?text=MedClub+T-Shirt" alt="MedClub T-Shirt" class="w-full rounded-lg shadow-md">
+                    </div>
+
+                    <!-- Product Info and Form -->
+                    <div>
+                        <a href="shop.html" class="text-sm text-sky-500 hover:underline mb-2 inline-block">&larr; Back to Shop</a>
+                        <h1 class="text-4xl font-bold text-gray-900">MedClub T-Shirt</h1>
+                        <p class="text-3xl font-bold gradient-text my-4">$25.00</p>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Show your club pride with the official MedClub T-Shirt. Made from 100% high-quality ring-spun cotton for a soft and comfortable fit. Features the MedClub logo screen-printed on the front. All proceeds support our club's events and activities.
+                        </p>
+                        
+                        <form id="purchase-form">
+                            <div class="grid grid-cols-2 gap-4 mb-6">
+                                <div>
+                                    <label for="size" class="block text-sm font-medium text-gray-700 mb-1">Size</label>
+                                    <select id="size" name="size" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                        <option>Small</option>
+                                        <option>Medium</option>
+                                        <option>Large</option>
+                                        <option>X-Large</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500">
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-600 transition duration-300 text-lg">Purchase</button>
+                        </form>
+                         <div class="mt-8 bg-gray-50 p-4 rounded-lg shadow-inner">
+                            <h4 class="text-md font-semibold text-gray-800">How to Order:</h4>
+                            <p class="text-gray-600 mt-2 text-sm">
+                                Clicking "Purchase" will open your default email client with a pre-filled order request including your selected size and quantity. Simply send the email to place your order. We will reply with payment instructions and delivery details.
+                            </p>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div>
+                    <a href="index.html" class="text-2xl font-bold">
+                        <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
+                    </a>
+                    <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <p class="font-semibold mb-2">Follow Us</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-500">
+                &copy; <span id="year"></span> MedClub. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Handle Purchase Form Submission
+        const purchaseForm = document.getElementById('purchase-form');
+        purchaseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const itemName = "MedClub T-Shirt";
+            const itemPrice = 25.00;
+            const size = document.getElementById('size').value;
+            const quantity = document.getElementById('quantity').value;
+            
+            const recipientEmail = 'medclubfmpa@gmail.com';
+            const subject = `Purchase Order: ${quantity}x ${itemName} (Size: ${size})`;
+            const body = `Hello MedClub,\n\nI would like to purchase the following item:\n\n- Product: ${itemName}\n- Size: ${size}\n- Quantity: ${quantity}\n- Total Price: $${(itemPrice * quantity).toFixed(2)}\n\nPlease provide me with payment and pickup information.\n\nThank you!`;
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
+</body>
+</html>
