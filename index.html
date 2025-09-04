@@ -39,6 +39,51 @@
     </style>
 </head>
 <body class="bg-white text-gray-800">
+<!-- Dynamic Intro Opener -->
+<div id="intro" class="intro-screen">
+  <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-24 w-auto mb-6 logo-animate">
+  <p class="text-lg font-semibold text-sky-600 text-animate">Welcome to MedClub</p>
+</div>
+
+<style>
+  .intro-screen {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    z-index: 1000;
+    transition: opacity 1s ease, visibility 1s ease;
+  }
+  .intro-screen.hidden { opacity: 0; visibility: hidden; }
+  .logo-animate {
+    animation: zoomIn 1.5s ease forwards;
+  }
+  .text-animate {
+    opacity: 0;
+    animation: fadeUp 2s ease forwards;
+    animation-delay: 1s;
+  }
+  @keyframes zoomIn {
+    from { transform: scale(0.5); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @keyframes fadeUp {
+    from { transform: translateY(30px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+</style>
+
+<script>
+  // Hide intro after 3s
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('intro').classList.add('hidden');
+    }, 3000);
+  });
+</script>
 
     <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
