@@ -69,7 +69,7 @@
                             <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
                             <p class="text-gray-600 mb-4 flex-grow">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
                             <p class="text-2xl font-bold gradient-text mb-4">$25.00</p>
-                            <button onclick="purchaseItem('MedClub T-Shirt', '25.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
+                            <a href="product-tshirt.html" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">View Details</a>
                         </div>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                  <div class="mt-12 bg-gray-50 p-6 rounded-2xl shadow-inner max-w-3xl mx-auto">
                     <h4 class="text-lg font-semibold text-gray-800">How to Order:</h4>
                     <p class="text-gray-600 mt-2">
-                        Clicking "Buy Now" will open your default email client with a pre-filled order request. Simply send the email to place your order. We will reply with payment instructions and delivery details.
+                        Click "View Details" on a product to learn more and place your order.
                     </p>
                  </div>
             </div>
@@ -120,16 +120,6 @@
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Shop Section: Purchase Item
-        function purchaseItem(itemName, itemPrice) {
-            const recipientEmail = 'medclubfmpa@gmail.com';
-            const subject = `Purchase Order: ${itemName}`;
-            const body = `Hello MedClub,\n\nI would like to purchase the following item:\n\n- Product: ${itemName}\n- Price: $${itemPrice}\n\nPlease provide me with payment and pickup information.\n\nThank you!`;
-            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
-        }
-
     </script>
 </body>
 </html>
