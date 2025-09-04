@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Cart - MedClub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .payment-option input[type="radio"] {
+            display: none;
+        }
+        .payment-option label {
+            transition: all 0.2s ease-in-out;
+        }
+        .payment-option input[type="radio"]:checked + label {
+            border-color: #0ea5e9;
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-2xl font-bold text-gray-900">
+                  <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
+            </a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="index.html#about" class="text-gray-600 hover:text-sky-500 transition duration-300">About Us</a>
+                <a href="index.html#offerings" class="text-gray-600 hover:text-sky-500 transition duration-300">What We Offer</a>
+                <a href="index.html#events" class="text-gray-600 hover:text-sky-500 transition duration-300">Events</a>
+                <a href="index.html#team" class="text-gray-600 hover:text-sky-500 transition duration-300">Our Team</a>
+                <a href="shop.html" class="text-gray-600 hover:text-sky-500 transition duration-300">Shop</a>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="cart.html" class="relative text-sky-500 font-semibold transition duration-300">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-3 bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="index.html#join" class="hidden sm:block bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+            </div>
+             <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden ml-4">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="index.html#about" class="block py-2 text-gray-600 hover:text-sky-500">About Us</a>
+            <a href="index.html#offerings" class="block py-2 text-gray-600 hover:text-sky-500">What We Offer</a>
+            <a href="index.html#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
+            <a href="index.html#team" class="block py-2 text-gray-600 hover:text-sky-500">Our Team</a>
+            <a href="shop.html" class="block py-2 text-gray-600 hover:text-sky-500">Shop</a>
+             <a href="index.html#join" class="block py-2 mt-2 bg-sky-500 text-white text-center font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+        </div>
+    </header>
+
+    <main class="py-20">
+        <div class="container mx-auto px-6">
+            <h1 class="text-3xl font-bold text-gray-900 mb-8">Your Shopping Cart</h1>
+            <div id="cart-container" class="lg:grid lg:grid-cols-3 lg:gap-8">
+                
+                <!-- Cart Items will be dynamically inserted here -->
+                <div id="cart-items" class="lg:col-span-2 space-y-4">
+                    <!-- Placeholder for empty cart -->
+                    <div id="empty-cart-message" class="hidden bg-white p-8 rounded-lg shadow text-center">
+                        <i class="fas fa-shopping-cart text-4xl text-gray-300 mb-4"></i>
+                        <h2 class="text-xl font-semibold text-gray-700">Your cart is empty</h2>
+                        <p class="text-gray-500 mt-2">Looks like you haven't added any items yet.</p>
+                        <a href="shop.html" class="mt-4 inline-block bg-sky-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-sky-600 transition duration-300">Start Shopping</a>
+                    </div>
+                </div>
+
+                <!-- Order Summary -->
+                <div id="order-summary" class="lg:col-span-1 mt-8 lg:mt-0">
+                    <div class="bg-white p-6 rounded-lg shadow-lg sticky top-28">
+                        <h2 class="text-xl font-bold border-b pb-4 mb-4">Order Summary</h2>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between">
+                                <span>Subtotal</span>
+                                <span id="summary-subtotal">$0.00</span>
+                            </div>
+                            <div class="flex justify-between text-lg font-bold">
+                                <span>Total</span>
+                                <span id="summary-total">$0.00</span>
+                            </div>
+                        </div>
+                        <hr class="my-4">
+                         <!-- Payment Method Selection -->
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Payment Method</label>
+                            <div class="grid grid-cols-1 gap-4">
+                               <div class="payment-option">
+                                    <input type="radio" id="pay-online" name="payment_method" value="online" checked>
+                                    <label for="pay-online" class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer">
+                                        <i class="fas fa-credit-card text-sky-500 text-xl mr-3"></i>
+                                        <div>
+                                            <span class="font-semibold text-gray-800">Pay Online</span>
+                                            <p class="text-xs text-gray-500">Card, Apple Pay, etc.</p>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div class="payment-option">
+                                    <input type="radio" id="pay-cod" name="payment_method" value="cod">
+                                    <label for="pay-cod" class="flex items-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer">
+                                        <i class="fas fa-hand-holding-usd text-sky-500 text-xl mr-3"></i>
+                                        <div>
+                                            <span class="font-semibold text-gray-800">Cash on Delivery</span>
+                                            <p class="text-xs text-gray-500">Pay when you receive it.</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="proceed-btn" class="w-full bg-sky-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-sky-600 transition duration-300 text-lg">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Cash on Delivery Modal -->
+    <div id="cod-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-xl shadow-2xl p-8 w-full max-w-md relative">
+            <div id="modal-form-content">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900">Cash on Delivery Order</h2>
+                    <button id="close-modal-btn" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                <form id="confirm-purchase-form" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY">
+                    <input type="hidden" name="subject" value="New MedClub Order (Cash on Delivery)">
+                    <input type="hidden" name="from_name" value="MedClub Shop">
+                    <input type="hidden" id="modal-order-summary" name="order_summary">
+                    <input type="hidden" id="modal-total-price" name="total_price">
+
+                    <div class="mb-4">
+                        <label for="customer_name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                        <input type="text" id="customer_name" name="customer_name" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="customer_email" class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                        <input type="email" id="customer_email" name="customer_email" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="customer_phone" class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                        <input type="tel" id="customer_phone" name="customer_phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg" required>
+                    </div>
+                    <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600">Confirm Cash Order</button>
+                </form>
+            </div>
+             <div id="modal-success-content" class="hidden text-center">
+                <div class="text-5xl text-green-500 mb-4"><i class="fas fa-check-circle"></i></div>
+                <h3 class="text-2xl font-bold mb-2 text-gray-900">Order Placed!</h3>
+                <p class="text-gray-600">Thank you! We'll contact you shortly to arrange delivery and payment.</p>
+                <button id="done-btn" class="mt-6 w-full bg-gray-200 text-gray-800 font-bold py-2 px-6 rounded-lg hover:bg-gray-300">Done</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-10">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div>
+                    <a href="index.html" class="text-2xl font-bold">
+                        <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
+                    </a>
+                    <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <p class="font-semibold mb-2">Follow Us</p>
+                    <div class="flex justify-center md:justify-start space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white transition duration-300 text-2xl"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border-gray-700 my-8">
+            <div class="text-center text-gray-500">
+                &copy; <span id="year"></span> MedClub. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // --- Cart State Management ---
+        const getCart = () => JSON.parse(sessionStorage.getItem('medclubCart') || '[]');
+        const saveCart = (cart) => {
+            sessionStorage.setItem('medclubCart', JSON.stringify(cart));
+            renderCart();
+            updateCartCount();
+        };
+
+        const cartCountEl = document.getElementById('cart-count');
+        const updateCartCount = () => {
+            const cart = getCart();
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountEl.textContent = totalItems;
+        };
+
+        // --- Render Cart on Page Load ---
+        const cartItemsContainer = document.getElementById('cart-items');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const orderSummaryEl = document.getElementById('order-summary');
+        const subtotalEl = document.getElementById('summary-subtotal');
+        const totalEl = document.getElementById('summary-total');
+        
+        function renderCart() {
+            const cart = getCart();
+            cartItemsContainer.innerHTML = ''; // Clear existing items
+
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden');
+                orderSummaryEl.classList.add('hidden');
+                return;
+            }
+
+            emptyCartMessage.classList.add('hidden');
+            orderSummaryEl.classList.remove('hidden');
+            
+            let subtotal = 0;
+
+            cart.forEach((item, index) => {
+                const itemTotal = item.price * item.quantity;
+                subtotal += itemTotal;
+
+                const cartItemEl = document.createElement('div');
+                cartItemEl.className = 'bg-white p-4 rounded-lg shadow flex items-center gap-4';
+                cartItemEl.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover rounded-md">
+                    <div class="flex-grow">
+                        <h3 class="font-bold">${item.name}</h3>
+                        <p class="text-sm text-gray-500">Size: ${item.size}</p>
+                        <p class="text-sm text-gray-500">Price: $${item.price.toFixed(2)}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <label for="qty-${index}" class="sr-only">Quantity</label>
+                        <input type="number" id="qty-${index}" value="${item.quantity}" min="1" class="w-16 p-1 border rounded" data-index="${index}">
+                    </div>
+                    <div class="text-right">
+                        <p class="font-semibold">$${itemTotal.toFixed(2)}</p>
+                        <button class="text-red-500 hover:underline text-sm remove-item" data-index="${index}">Remove</button>
+                    </div>
+                `;
+                cartItemsContainer.appendChild(cartItemEl);
+            });
+            
+            subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+            totalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+            // Add event listeners for new elements
+            document.querySelectorAll('.remove-item').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    let cart = getCart();
+                    cart.splice(index, 1); // Remove item from array
+                    saveCart(cart);
+                });
+            });
+
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.addEventListener('change', (e) => {
+                    const index = parseInt(e.target.dataset.index);
+                    const newQuantity = parseInt(e.target.value);
+                    let cart = getCart();
+                    if (newQuantity > 0) {
+                        cart[index].quantity = newQuantity;
+                    } else {
+                        // If quantity is 0 or less, remove the item
+                        cart.splice(index, 1);
+                    }
+                    saveCart(cart);
+                });
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCart();
+            updateCartCount();
+        });
+
+        // --- Checkout Logic ---
+        const proceedBtn = document.getElementById('proceed-btn');
+        const stripePaymentLink = "https://buy.stripe.com/test_YOUR_LINK_HERE"; // Replace
+        const codModal = document.getElementById('cod-modal');
+
+        proceedBtn.addEventListener('click', () => {
+            const selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+             const cart = getCart();
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            if (selectedPaymentMethod === 'online') {
+                window.location.href = stripePaymentLink;
+            } else {
+                openCodModal();
+            }
+        });
+        
+        // --- COD Modal Logic ---
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const doneBtn = document.getElementById('done-btn');
+        const confirmPurchaseForm = document.getElementById('confirm-purchase-form');
+        const modalFormContent = document.getElementById('modal-form-content');
+        const modalSuccessContent = document.getElementById('modal-success-content');
+
+        function openCodModal() {
+            const cart = getCart();
+            let summaryText = "";
+            let total = 0;
+            cart.forEach(item => {
+                summaryText += `${item.name} (Size: ${item.size}) x ${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
+                total += item.price * item.quantity;
+            });
+            
+            document.getElementById('modal-order-summary').value = summaryText;
+            document.getElementById('modal-total-price').value = `$${total.toFixed(2)}`;
+            codModal.classList.remove('hidden');
+        }
+        
+        const closeCodModal = () => codModal.classList.add('hidden');
+        closeModalBtn.addEventListener('click', closeCodModal);
+        doneBtn.addEventListener('click', () => {
+            // Clear cart after successful COD order
+            saveCart([]);
+            closeCodModal();
+        });
+
+        confirmPurchaseForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+                body: json
+            })
+            .then(async (response) => {
+                if (response.status == 200) {
+                    modalFormContent.classList.add('hidden');
+                    modalSuccessContent.classList.remove('hidden');
+                } else {
+                    alert('An error occurred. Please try again.');
+                }
+            })
+            .catch(error => alert('An error occurred. Please try again.'));
+        });
+    </script>
+
+</body>
+</html>
