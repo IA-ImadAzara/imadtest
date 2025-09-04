@@ -11,8 +11,11 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        .hero-bg {
-            background-color: #f0f8ff; /* Lighter sky blue */
+        /* Updated hero section style */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/kp3yVNM.jpeg');
+            background-size: cover;
+            background-position: center;
         }
         .section-title {
             font-weight: 800;
@@ -88,8 +91,7 @@
     <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-900">
-                  <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+            <a href="index.html" class="text-2xl font-bold text-gray-900">
                   <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
             </a>
             <div class="hidden md:flex items-center space-x-8">
@@ -117,12 +119,12 @@
 
     <!-- Hero Section -->
     <main>
-        <section class="hero-bg">
+        <section class="hero-section">
             <div class="container mx-auto px-6 py-20 md:py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
                     Shaping the Future of <span class="gradient-text">Medicine, Together</span>.
                 </h1>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                <p class="text-lg text-gray-200 max-w-3xl mx-auto mb-8">
                     Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire the next generation of healthcare leaders.
                 </p>
                 <a href="#join" class="bg-sky-500 text-white font-bold py-3 px-8 rounded-lg text-lg hover:bg-sky-600 transition duration-300 shadow-xl inline-block">Become a Member</a>
@@ -289,51 +291,6 @@
             </div>
         </section>
 
-        <!-- Shop Section -->
-        <section id="shop" class="py-20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title text-gray-900 mb-12">Club Merchandise</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Product 1 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=MedClub+T-Shirt" alt="MedClub T-Shirt" class="w-full h-56 object-cover">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
-                            <p class="text-gray-600 mb-4 flex-grow">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
-                            <p class="text-2xl font-bold gradient-text mb-4">$25.00</p>
-                            <button onclick="purchaseItem('MedClub T-Shirt', '25.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
-                        </div>
-                    </div>
-                    <!-- Product 2 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=MedClub+Mug" alt="MedClub Mug" class="w-full h-56 object-cover">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub Coffee Mug</h3>
-                            <p class="text-gray-600 mb-4 flex-grow">Start your day with this sturdy ceramic mug, perfect for late-night study sessions.</p>
-                            <p class="text-2xl font-bold gradient-text mb-4">$15.00</p>
-                            <button onclick="purchaseItem('MedClub Coffee Mug', '15.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
-                        </div>
-                    </div>
-                    <!-- Product 3 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col">
-                        <img src="https://placehold.co/600x400/E0F2FE/0EA5E9?text=Stethoscope" alt="Stethoscope" class="w-full h-56 object-cover">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">Professional Stethoscope</h3>
-                            <p class="text-gray-600 mb-4 flex-grow">A reliable, high-quality stethoscope for clinical practice. Recommended for all members.</p>
-                            <p class="text-2xl font-bold gradient-text mb-4">$75.00</p>
-                            <button onclick="purchaseItem('Professional Stethoscope', '75.00')" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-                 <div class="mt-12 bg-gray-50 p-6 rounded-2xl shadow-inner">
-                    <h4 class="text-lg font-semibold text-gray-800">How to Order:</h4>
-                    <p class="text-gray-600 mt-2 max-w-2xl mx-auto">
-                        Clicking "Buy Now" will open your default email client with a pre-filled order request. Simply send the email to place your order. We will reply with payment instructions and delivery details.
-                    </p>
-                 </div>
-            </div>
-        </section>
-
         <!-- Join Us Section -->
         <section id="join" class="py-20">
             <div class="container mx-auto px-6">
@@ -349,7 +306,7 @@
                             <div id="form-content">
                                 <h3 class="text-2xl font-bold text-gray-900 mb-6">Membership Inquiry</h3>
                                 <!-- IMPORTANT: Replace with your Access Key -->
-                                <input type="hidden" name="access_key" value="4cd273b2-ad89-4328-a122-995acc03957e">
+                                <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY">
                                 <input type="hidden" name="subject" value="New MedClub Membership Inquiry">
                                 <input type="hidden" name="from_name" value="MedClub Website">
                                 
@@ -392,8 +349,7 @@
         <div class="container mx-auto px-6 py-10">
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div>
-                    <a href="#" class="text-2xl font-bold">
-                        <!-- LOGO PLACEHOLDER: Replace the 'src' URL below with the link to your logo. -->
+                    <a href="index.html" class="text-2xl font-bold">
                         <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
                     </a>
                     <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
@@ -571,20 +527,8 @@
                 welcomeBtn.disabled = false;
             }
         });
-        
-        // Shop Section: Purchase Item
-        function purchaseItem(itemName, itemPrice) {
-            const recipientEmail = 'imad.azara@edu.uiz.ac.ma';
-            const subject = `Purchase Order: ${itemName}`;
-            const body = `Hello MedClub,\n\nI would like to purchase the following item:\n\n- Product: ${itemName}\n- Price: $${itemPrice}\n\nPlease provide me with payment and pickup information.\n\nThank you!`;
-            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailtoLink;
-        }
 
     </script>
 </body>
 </html>
-
-
-
 
