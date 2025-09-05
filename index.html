@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MedClub - Aspiring Medical Professionals</title>
+    <!-- Favicon Link -->
+    <link rel="icon" type="image/png" href="https://i.imgur.com/P4COQcz.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,8 +13,7 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Updated hero section style */
-        .hero-section {
+        .hero-bg {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://i.imgur.com/kp3yVNM.jpeg');
             background-size: cover;
             background-position: center;
@@ -42,6 +43,7 @@
     </style>
 </head>
 <body class="bg-white text-gray-800">
+
 <!-- Dynamic Intro Opener -->
 <div id="intro" class="intro-screen">
   <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-24 w-auto mb-6 logo-animate">
@@ -101,9 +103,15 @@
                 <a href="#team" class="text-gray-600 hover:text-sky-500 transition duration-300">Our Team</a>
                 <a href="shop.html" class="text-gray-600 hover:text-sky-500 transition duration-300">Shop</a>
             </div>
-            <a href="#join" class="bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+            <div class="flex items-center gap-4">
+                 <a href="cart.html" class="relative text-gray-600 hover:text-sky-500 transition duration-300">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span id="cart-count" class="absolute -top-2 -right-3 bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                </a>
+                <a href="#join" class="hidden sm:block bg-sky-500 text-white font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+            </div>
              <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden">
+            <button id="mobile-menu-button" class="md:hidden ml-4">
                 <i class="fas fa-bars text-2xl"></i>
             </button>
         </nav>
@@ -114,15 +122,16 @@
             <a href="#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
             <a href="#team" class="block py-2 text-gray-600 hover:text-sky-500">Our Team</a>
             <a href="shop.html" class="block py-2 text-gray-600 hover:text-sky-500">Shop</a>
+            <a href="#join" class="block py-2 mt-2 bg-sky-500 text-white text-center font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
         </div>
     </header>
 
     <!-- Hero Section -->
     <main>
-        <section class="hero-section">
+        <section class="hero-bg text-white">
             <div class="container mx-auto px-6 py-20 md:py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold text-white leading-tight mb-4">
-                    Shaping the Future of <span class="gradient-text">Medicine, Together</span>.
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">
+                    Shaping the Future of <span style="color: #22d3ee;">Medicine, Together</span>.
                 </h1>
                 <p class="text-lg text-gray-200 max-w-3xl mx-auto mb-8">
                     Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire the next generation of healthcare leaders.
@@ -227,7 +236,7 @@
                          </div>
                          <a href="#" class="bg-sky-500 text-white font-semibold px-6 py-2 rounded-lg hover:bg-sky-600 transition duration-300 w-full md:w-auto text-center">Register Now</a>
                     </div>
-                    <!-- Event 3 -->
+                     <!-- Event 3 -->
                     <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 overflow-hidden">
                          <div class="bg-sky-100 text-sky-600 p-4 rounded-lg text-center w-full md:w-auto">
                             <p class="text-xl font-bold">NOV</p>
@@ -256,7 +265,6 @@
                 </div>
             </div>
         </section>
-
 
         <!-- Meet the Team Section -->
         <section id="team" class="py-20 bg-gray-50">
@@ -302,14 +310,11 @@
                         </p>
                     </div>
                     <div class="lg:w-1/2 w-full">
-                        <form id="join-form" action="https://api.web3forms.com/submit" method="POST" class="bg-white p-8 rounded-xl shadow-lg w-full">
-                            <div id="form-content">
+                        <form id="join-form" class="bg-white p-8 rounded-xl shadow-lg w-full relative z-10">
+                             <div id="form-content">
                                 <h3 class="text-2xl font-bold text-gray-900 mb-6">Membership Inquiry</h3>
-                                <!-- IMPORTANT: Replace with your Access Key -->
-                                <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY">
-                                <input type="hidden" name="subject" value="New MedClub Membership Inquiry">
-                                <input type="hidden" name="from_name" value="MedClub Website">
-                                
+                                <input type="hidden" name="access_key" value="4cd273b2-ad89-4328-a122-995acc03957e">
+                                <input type="hidden" name="subject" value="New Membership Inquiry from MedClub Website">
                                 <div class="mb-4">
                                     <label for="name" class="block text-gray-700 font-semibold mb-2">Full Name</label>
                                     <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
@@ -349,7 +354,7 @@
         <div class="container mx-auto px-6 py-10">
             <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
                 <div>
-                    <a href="index.html" class="text-2xl font-bold">
+                    <a href="#" class="text-2xl font-bold">
                         <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto mx-auto md:mx-0">
                     </a>
                     <p class="text-gray-400 mt-2">Fostering the next generation of healthcare leaders.</p>
@@ -380,14 +385,24 @@
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
+        
+        // Cart count updater
+        const updateCartCount = () => {
+            const cart = JSON.parse(sessionStorage.getItem('medclubCart') || '[]');
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').textContent = totalItems;
+        };
+        document.addEventListener('DOMContentLoaded', updateCartCount);
+
 
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetElement = document.querySelector(this.getAttribute('href'));
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
                 if(mobileMenu.classList.contains('hidden') === false){
                     mobileMenu.classList.add('hidden');
                 }
@@ -395,24 +410,8 @@
         });
         
         // --- Gemini API Integration ---
-        const apiKey = ""; // Leave as-is, will be handled by the environment
+        const apiKey = ""; // Leave as-is
         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-        // Generic function to call Gemini API
-        async function callGemini(prompt) {
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
-            });
-
-            if (!response.ok) {
-                throw new Error(`API Error: ${response.status}`);
-            }
-
-            const data = await response.json();
-            return data.candidates[0].content.parts[0].text;
-        }
 
         // Feature 1: Event Idea Generator
         const generateIdeasBtn = document.getElementById('generate-ideas-btn');
@@ -448,80 +447,94 @@
                     const title = match[1];
                     const description = match[2];
                     html += `<div class="bg-white p-4 rounded-lg shadow-md border-l-4 border-sky-400">
-                                <h4 class="font-bold text-lg text-gray-800">${title}</h4>
-                                <p class="text-gray-600">${description}</p>
+                                 <h4 class="font-bold text-lg text-gray-800">${title}</h4>
+                                 <p class="text-gray-600">${description}</p>
                              </div>`;
                 }
             });
             html += '</div>';
             return html;
         }
+        
+        async function callGemini(prompt) {
+             const payload = { contents: [{ parts: [{ text: prompt }] }] };
+             const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+             });
+             if (!response.ok) {
+                throw new Error(`API call failed with status ${response.status}`);
+             }
+             const data = await response.json();
+             return data.candidates[0].content.parts[0].text;
+        }
 
-        // Feature 2: Personalized Welcome Message & Direct Form Submission
+        // --- Web3Forms & Welcome Message Logic ---
         const joinForm = document.getElementById('join-form');
         const formContent = document.getElementById('form-content');
         const formSuccess = document.getElementById('form-success');
         const welcomeBtn = document.getElementById('welcome-message-btn');
         const welcomeLoader = document.getElementById('welcome-loader');
         const welcomeContainer = document.getElementById('welcome-message-container');
+        let userNameForWelcome = '';
 
         joinForm.addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const submitButton = joinForm.querySelector('button[type="submit"]');
-            const originalButtonText = submitButton.textContent;
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
-
             const formData = new FormData(joinForm);
             const object = Object.fromEntries(formData);
             const json = JSON.stringify(object);
+            
+            userNameForWelcome = object.name; // Store name for welcome message
+            
+            // Show loading state if you want
+            const submitButton = joinForm.querySelector('button[type="submit"]');
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
 
             fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
-            })
-            .then(async (response) => {
-                let jsonResponse = await response.json();
-                if (response.status == 200) {
-                    formContent.classList.add('hidden');
-                    formSuccess.classList.remove('hidden');
-                    welcomeContainer.innerHTML = ''; 
-                } else {
-                    console.log(response);
-                    alert(`Error: ${jsonResponse.message}`);
-                }
-            })
-            .catch(error => {
-                console.log(error);
-                alert("An error occurred. Please try again later.");
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = originalButtonText;
-                joinForm.reset();
-            });
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                })
+                .then(async (response) => {
+                    let jsonResponse = await response.json();
+                    if (response.status == 200) {
+                        formContent.classList.add('hidden');
+                        formSuccess.classList.remove('hidden');
+                    } else {
+                        console.log(response);
+                        // Handle error
+                        alert(`Error: ${jsonResponse.message}`);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    alert("An error occurred. Please try again later.");
+                })
+                .finally(() => {
+                    submitButton.textContent = 'Send Inquiry';
+                    submitButton.disabled = false;
+                    joinForm.reset();
+                });
         });
-
-
+        
         welcomeBtn.addEventListener('click', async () => {
             welcomeLoader.classList.remove('hidden');
             welcomeContainer.innerHTML = '';
             welcomeBtn.disabled = true;
-
-            const userName = document.getElementById('name').value || "future member"; // This will be empty now, but we'll leave the logic
-            const prompt = `You are the enthusiastic president of MedClub. Write a short (around 30-40 words), warm, and welcoming message for a new prospective member. Express excitement about them joining the community.`;
             
+            const prompt = `Write a short, friendly, and personalized welcome message for a new potential member of our university's medical club, MedClub. Their name is ${userNameForWelcome}. Mention that we are excited they've reached out and that they will hear from a team member soon. Keep it under 50 words.`;
+
             try {
                 const response = await callGemini(prompt);
-                welcomeContainer.textContent = response;
+                welcomeContainer.innerHTML = `<p>${response}</p>`;
             } catch (error) {
                 console.error("Error generating welcome message:", error);
-                welcomeContainer.textContent = "We're so excited you're interested in joining! We can't wait to see you at our next event.";
+                welcomeContainer.innerHTML = `<p class="text-red-500">Could not generate a message right now. But we're still very excited you're here!</p>`;
             } finally {
                 welcomeLoader.classList.add('hidden');
                 welcomeBtn.disabled = false;
@@ -531,7 +544,4 @@
     </script>
 </body>
 </html>
-
-
-
 
