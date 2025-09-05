@@ -104,6 +104,10 @@
         @keyframes pixel-fade-out {
             to { opacity: 0; }
         }
+        /* ** NEW ** Guaranteed fix for mobile menu background */
+        #mobile-menu {
+            background-color: white;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -144,7 +148,7 @@
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white shadow-lg rounded-b-lg">
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 shadow-lg rounded-b-lg">
             <a href="index.html#about" class="block py-2 text-gray-600 hover:text-sky-500">About Us</a>
             <a href="index.html#offerings" class="block py-2 text-gray-600 hover:text-sky-500">What We Offer</a>
             <a href="index.html#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
