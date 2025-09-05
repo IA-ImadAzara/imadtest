@@ -12,23 +12,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
-        // Set up Tailwind for dark mode
-        tailwind.config = {
-            darkMode: 'class',
-        }
+        tailwind.config = { darkMode: 'class' }
     </script>
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
-            /* Default to light theme */
             background-color: #ffffff; 
             color: #1f2937; 
             cursor: none; 
         }
-        /* Dark mode styles */
         .dark body {
             background-color: #111111;
             color: #E0E0E0;
@@ -44,28 +37,24 @@
             line-height: 1.2;
             letter-spacing: -0.025em;
         }
-        /* -- Custom Cursor -- */
         #cursor {
             position: fixed;
             width: 20px;
             height: 20px;
-            border: 2px solid #111111; /* Dark cursor for light mode */
+            border: 2px solid #111111;
             border-radius: 50%;
             pointer-events: none;
             transform: translate(-50%, -50%);
             transition: all 0.1s ease-out;
             z-index: 9999;
         }
-        .dark #cursor {
-             border: 2px solid #ffffff; /* White cursor for dark mode */
-        }
+        .dark #cursor { border: 2px solid #ffffff; }
         #cursor.hover {
             width: 50px;
             height: 50px;
             background-color: rgba(14, 165, 233, 0.2);
             border-color: #0ea5e9;
         }
-        /* -- Scroll-in Animations -- */
         .fade-in-up {
             opacity: 0;
             transform: translateY(50px);
@@ -81,6 +70,17 @@
         }
         .dark #header-logo {
             filter: brightness(0) invert(1);
+        }
+        #scroll-animation-wrapper {
+            --progress: 0;
+        }
+        #scroll-image-container {
+            width: calc(90% - (45% * var(--progress)));
+            transform: translateX(calc(5% + (5% * var(--progress))));
+        }
+        #scroll-text-content {
+            transform: translateX(calc(100% * (1 - var(--progress))));
+            opacity: var(--progress);
         }
     </style>
 </head>
@@ -107,18 +107,15 @@
                     <span id="cart-count" class="absolute -top-2 -right-3 bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
                 </a>
                  <a href="#join" class="hidden sm:inline-block border border-sky-500 text-sky-500 font-semibold px-5 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300 text-sm">Join Us</a>
-                <!-- Theme Toggle Button -->
                 <button id="theme-toggle" class="ml-2 text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition-colors duration-300">
                     <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
                     <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM1 11a1 1 0 100-2H0a1 1 0 100 2h1z"></path></svg>
                 </button>
             </div>
-             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden ml-4 text-2xl text-gray-800 dark:text-white">
+             <button id="mobile-menu-button" class="md:hidden ml-4 text-2xl text-gray-800 dark:text-white">
                 <i class="fas fa-bars"></i>
             </button>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-[#1a1a1a] px-6 pb-4 shadow-lg">
             <a href="#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">About Us</a>
             <a href="#offerings" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">What We Offer</a>
@@ -129,16 +126,12 @@
     </header>
 
     <main>
-        <!-- Hero Section with Canvas Animation -->
+        <!-- Hero Section -->
         <section class="relative h-screen flex items-center justify-center text-center bg-white dark:bg-transparent">
             <canvas id="particle-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
             <div class="relative z-10 p-6">
-                <h1 class="text-5xl md:text-8xl font-extrabold text-gray-900 dark:text-white leading-tight">
-                    Innovating the Future of Medicine.
-                </h1>
-                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-6">
-                    Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire the next generation of healthcare leaders.
-                </p>
+                <h1 class="text-5xl md:text-8xl font-extrabold text-gray-900 dark:text-white leading-tight">Innovating the Future of Medicine.</h1>
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-6">Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire.</p>
             </div>
         </section>
 
@@ -152,36 +145,25 @@
                     <div class="md:pl-10 fade-in-up" style="transition-delay: 200ms;">
                         <p class="gradient-text font-semibold mb-2 tracking-widest">OUR MISSION</p>
                         <h2 class="section-title text-gray-900 dark:text-white mb-6">About MedClub</h2>
-                        <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-                            Founded in 2023, MedClub is a student-led organization dedicated to fostering a collaborative environment for individuals passionate about a career in medicine. 
-                        </p>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
-                            Our core mission is to bridge the gap between academic learning and practical application, empowering our members with the knowledge, skills, and confidence needed to excel.
-                        </p>
+                        <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">Founded in 2023, MedClub is a student-led organization dedicated to fostering a collaborative environment for individuals passionate about a career in medicine.</p>
+                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Our core mission is to bridge the gap between academic learning and practical application, empowering our members with the knowledge and confidence to excel.</p>
                     </div>
                 </div>
             </div>
         </section>
-
+        
         <!-- Horizontal Scroll Section -->
-        <section id="horizontal-scroll-container" class="relative h-[300vh]">
+        <section id="horizontal-scroll-container" class="relative h-[250vh] bg-gradient-to-r from-sky-500 to-cyan-400 dark:bg-none dark:bg-white">
             <div class="sticky top-0 h-screen overflow-hidden">
-                <div id="horizontal-scroll-content" class="h-full w-[200vw] flex">
-                    <div class="h-full w-[100vw] flex items-center justify-center">
-                        <!-- This is an empty panel to provide scroll space before content appears -->
+                <div id="scroll-animation-wrapper" class="relative w-full h-full flex items-center">
+                    <div id="scroll-image-container" class="absolute top-0 left-0 w-[90%] h-full p-16">
+                         <img src="https://i.imgur.com/kp3yVNM.jpeg" alt="Medical professionals" class="w-full h-full object-cover rounded-2xl shadow-2xl">
                     </div>
-                    <div class="h-full w-[100vw] flex items-center justify-center px-6">
-                        <div class="grid md:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-                            <div>
-                                <img src="https://i.imgur.com/kp3yVNM.jpeg" alt="Medical professionals" class="rounded-lg shadow-xl w-full">
-                            </div>
-                            <div>
-                                <p class="gradient-text font-semibold mb-2 tracking-widest">COLLABORATION</p>
-                                <h2 class="section-title text-gray-900 dark:text-white mb-6">Driven by Connection</h2>
-                                <p class="text-gray-500 dark:text-gray-400 leading-relaxed">
-                                    We believe that the future of medicine lies in collaborative innovation. Our community brings together bright minds from diverse backgrounds to share knowledge, challenge conventions, and push the boundaries of what's possible in healthcare.
-                                </p>
-                            </div>
+                     <div id="scroll-text-content" class="absolute top-0 right-0 w-1/2 h-full flex items-center pr-16">
+                        <div>
+                             <p class="font-semibold mb-2 tracking-widest text-white dark:gradient-text">COLLABORATION</p>
+                            <h2 class="section-title text-white dark:text-gray-900 mb-6">Driven by Connection</h2>
+                            <p class="text-gray-200 dark:text-gray-500 leading-relaxed">We believe that the future of medicine lies in collaborative innovation. Our community brings together bright minds from diverse backgrounds to share knowledge, challenge conventions, and push the boundaries of what's possible in healthcare.</p>
                         </div>
                     </div>
                 </div>
@@ -244,7 +226,7 @@
 
         <!-- Join Us Section -->
         <section id="join" class="py-24 bg-gray-50 dark:bg-[#1a1a1a] fade-in-up">
-            <div class="container mx-auto px-6">
+           <div class="container mx-auto px-6">
                 <div class="text-center max-w-2xl mx-auto mb-12">
                      <p class="gradient-text font-semibold mb-2 tracking-widest">BECOME A MEMBER</p>
                     <h2 class="section-title text-gray-900 dark:text-white">Ready to Join MedClub?</h2>
@@ -296,45 +278,36 @@
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').textContent = totalItems;
         };
-        document.addEventListener('DOMContentLoaded', updateCartCount);
-
-        // --- Theme Toggle ---
-        // ** FIXED ** Added variable declarations
+        
+        // --- Full Script, Corrected ---
+        
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
-        
-        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.classList.add('dark');
-            lightIcon.classList.remove('hidden');
-        } else {
-            darkIcon.classList.remove('hidden');
-        }
+
+        const applyTheme = () => {
+            if (localStorage.getItem('color-theme') === 'dark') {
+                document.documentElement.classList.add('dark');
+                lightIcon.classList.remove('hidden');
+                darkIcon.classList.add('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                darkIcon.classList.remove('hidden');
+                lightIcon.classList.add('hidden');
+            }
+        };
+
+        // Run on initial load
+        applyTheme();
+        updateCartCount();
 
         themeToggleBtn.addEventListener('click', function() {
-            darkIcon.classList.toggle('hidden');
-            lightIcon.classList.toggle('hidden');
-            if (localStorage.getItem('color-theme')) {
-                if (localStorage.getItem('color-theme') === 'light') {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                } else {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                }
-            } else {
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('color-theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('color-theme', 'dark');
-                }
-            }
+            const isDark = document.documentElement.classList.contains('dark');
+            localStorage.setItem('color-theme', isDark ? 'light' : 'dark');
+            applyTheme();
             initParticles();
         });
         
-        // --- Custom Cursor ---
         const cursor = document.getElementById('cursor');
         document.addEventListener('mousemove', e => {
             cursor.style.left = e.clientX + 'px';
@@ -345,33 +318,9 @@
             el.addEventListener('mouseout', () => cursor.classList.remove('hover'));
         });
 
-        // --- Canvas Particle Animation ---
         const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = canvas.parentElement.offsetHeight;
-            initParticles();
-        }
-        window.addEventListener('resize', resizeCanvas);
-        
-        function initParticles() {
-            particles = [];
-            let numberOfParticles = (canvas.height * canvas.width) / 9000;
-            const isDark = document.documentElement.classList.contains('dark');
-            const particleColor = isDark ? 'rgba(34, 211, 238, 0.8)' : 'rgba(55, 65, 81, 0.8)';
-
-            for (let i = 0; i < numberOfParticles; i++) {
-                let size = (Math.random() * 2.5) + 1;
-                let x = Math.random() * canvas.width;
-                let y = Math.random() * canvas.height;
-                let directionX = (Math.random() * .4) - .2;
-                let directionY = (Math.random() * .4) - .2;
-                particles.push(new Particle(x, y, directionX, directionY, size, particleColor));
-            }
-        }
         
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
@@ -392,7 +341,23 @@
                 this.draw();
             }
         }
+        
+        function initParticles() {
+            particles = [];
+            let numberOfParticles = (canvas.height * canvas.width) / 9000;
+            const isDark = document.documentElement.classList.contains('dark');
+            const particleColor = isDark ? 'rgba(34, 211, 238, 0.8)' : 'rgba(55, 65, 81, 0.8)';
 
+            for (let i = 0; i < numberOfParticles; i++) {
+                let size = (Math.random() * 2.5) + 1;
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                let directionX = (Math.random() * .4) - .2;
+                let directionY = (Math.random() * .4) - .2;
+                particles.push(new Particle(x, y, directionX, directionY, size, particleColor));
+            }
+        }
+        
         function connectParticles() {
             let opacityValue = 1;
             for (let a = 0; a < particles.length; a++) {
@@ -421,14 +386,18 @@
             connectParticles();
         }
 
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = canvas.parentElement.offsetHeight;
+            initParticles();
+        }
+        window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
         animateParticles();
         
-        // --- Join Form ---
         const joinForm = document.getElementById('join-form');
         // Add form logic here if needed in the future
 
-        // --- Smooth scroll-in animations ---
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -438,19 +407,17 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
         
-        // --- Horizontal Scroll Logic ---
         const scrollContainer = document.getElementById('horizontal-scroll-container');
-        const scrollContent = document.getElementById('horizontal-scroll-content');
+        const animationWrapper = document.getElementById('scroll-animation-wrapper');
         
         window.addEventListener('scroll', () => {
-            const { top, height } = scrollContainer.getBoundingClientRect();
-            const scrollableHeight = height - window.innerHeight;
+            const { top } = scrollContainer.getBoundingClientRect();
+            const scrollableHeight = scrollContainer.offsetHeight - window.innerHeight;
             
-            if (top < 0 && top > -scrollableHeight) {
-                const progress = -top / scrollableHeight;
-                const translateX = -progress * (scrollContent.offsetWidth - window.innerWidth);
-                scrollContent.style.transform = `translateX(${translateX}px)`;
-            }
+            let progress = -top / scrollableHeight;
+            progress = Math.max(0, Math.min(1, progress));
+
+            animationWrapper.style.setProperty('--progress', progress);
         });
     </script>
 </body>
