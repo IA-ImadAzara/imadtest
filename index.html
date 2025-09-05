@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,189 +82,241 @@
             transform: translateX(calc(100% * (1 - var(--progress))));
             opacity: var(--progress);
         }
+        /* --- Brand-to-Logo Opener --- */
+        #opener {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            background-color: #ffffff;
+            transition: opacity 0.8s ease-in-out;
+        }
+        .dark #opener { background-color: #111111; }
+        #opener-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            font-size: clamp(2rem, 10vw, 5rem);
+            font-weight: 800;
+            color: #1f2937;
+        }
+        .dark #opener-container { color: #E0E0E0; }
+        .opener-char {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .opener-char.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        #page-wrapper {
+            opacity: 0;
+            transition: opacity 0.8s ease-in;
+        }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Custom Cursor -->
-    <div id="cursor"></div>
+    <!-- Opener -->
+    <div id="opener">
+        <div id="opener-container">
+            <span class="opener-char">M</span>
+            <span class="opener-char">E</span>
+            <span class="opener-char">D</span>
+            <span class="opener-char">C</span>
+            <span class="opener-char">L</span>
+            <span class="opener-char">U</span>
+            <span class="opener-char">B</span>
+        </div>
+    </div>
 
-    <!-- Header & Navigation -->
-    <header class="bg-white/80 dark:bg-black/30 backdrop-blur-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold">
-                  <img id="header-logo" src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
-            </a>
-            <div class="hidden md:flex items-center space-x-8 text-sm">
-                <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">About</a>
-                <a href="#offerings" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Offerings</a>
-                <a href="#events" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Events</a>
-                <a href="shop.html" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Shop</a>
-            </div>
-            <div class="flex items-center gap-4">
-                 <a href="cart.html" class="relative text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">
-                    <i class="fas fa-shopping-cart text-xl"></i>
-                    <span id="cart-count" class="absolute -top-2 -right-3 bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+    <div id="page-wrapper">
+        <!-- Custom Cursor -->
+        <div id="cursor"></div>
+
+        <!-- Header & Navigation -->
+        <header class="bg-white/80 dark:bg-black/30 backdrop-blur-md sticky top-0 z-50">
+            <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold">
+                      <img id="header-logo" src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto opacity-0">
                 </a>
-                 <a href="#join" class="hidden sm:inline-block border border-sky-500 text-sky-500 font-semibold px-5 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300 text-sm">Join Us</a>
-                <button id="theme-toggle" class="ml-2 text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition-colors duration-300">
-                    <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                    <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM1 11a1 1 0 100-2H0a1 1 0 100 2h1z"></path></svg>
+                <div class="hidden md:flex items-center space-x-8 text-sm">
+                    <a href="#about" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">About</a>
+                    <a href="#offerings" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Offerings</a>
+                    <a href="#events" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Events</a>
+                    <a href="shop.html" class="text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">Shop</a>
+                </div>
+                <div class="flex items-center gap-4">
+                     <a href="cart.html" class="relative text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition duration-300">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="absolute -top-2 -right-3 bg-sky-500 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">0</span>
+                    </a>
+                     <a href="#join" class="hidden sm:inline-block border border-sky-500 text-sky-500 font-semibold px-5 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300 text-sm">Join Us</a>
+                    <button id="theme-toggle" class="ml-2 text-gray-600 dark:text-gray-300 hover:text-sky-500 dark:hover:text-white transition-colors duration-300">
+                        <svg id="theme-toggle-dark-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                        <svg id="theme-toggle-light-icon" class="hidden h-5 w-5" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-.707 12.122l.707-.707a1 1 0 011.414 1.414l-.707.707a1 1 0 01-1.414-1.414zM1 11a1 1 0 100-2H0a1 1 0 100 2h1z"></path></svg>
+                    </button>
+                </div>
+                 <button id="mobile-menu-button" class="md:hidden ml-4 text-2xl text-gray-800 dark:text-white">
+                    <i class="fas fa-bars"></i>
                 </button>
+            </nav>
+            <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-[#1a1a1a] px-6 pb-4 shadow-lg">
+                <a href="#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">About Us</a>
+                <a href="#offerings" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">What We Offer</a>
+                <a href="#events" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">Events</a>
+                <a href="shop.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">Shop</a>
+                <a href="#join" class="block py-2 mt-2 border border-sky-500 text-sky-500 text-center font-semibold px-5 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">Join Us</a>
             </div>
-             <button id="mobile-menu-button" class="md:hidden ml-4 text-2xl text-gray-800 dark:text-white">
-                <i class="fas fa-bars"></i>
-            </button>
-        </nav>
-        <div id="mobile-menu" class="hidden md:hidden bg-white dark:bg-[#1a1a1a] px-6 pb-4 shadow-lg">
-            <a href="#about" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">About Us</a>
-            <a href="#offerings" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">What We Offer</a>
-            <a href="#events" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">Events</a>
-            <a href="shop.html" class="block py-2 text-gray-600 dark:text-gray-300 hover:text-sky-500">Shop</a>
-            <a href="#join" class="block py-2 mt-2 border border-sky-500 text-sky-500 text-center font-semibold px-5 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">Join Us</a>
+        </header>
+
+        <main id="main-content">
+            <!-- Hero Section -->
+            <section class="relative h-screen flex items-center justify-center text-center bg-white dark:bg-transparent">
+                <canvas id="particle-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
+                <div class="relative z-10 p-6">
+                    <h1 class="text-5xl md:text-8xl font-extrabold text-gray-900 dark:text-white leading-tight">Innovating the Future of Medicine.</h1>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-6">Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire.</p>
+                </div>
+            </section>
+
+            <!-- About Us Section -->
+            <section id="about" class="py-24">
+                <div class="container mx-auto px-6">
+                    <div class="grid md:grid-cols-2 gap-16 items-center">
+                        <div class="fade-in-up">
+                            <img src="https://placehold.co/600x700/e0f2fe/0ea5e9?text=Community" alt="MedClub members collaborating" class="rounded-lg shadow-xl w-full">
+                        </div>
+                        <div class="md:pl-10 fade-in-up" style="transition-delay: 200ms;">
+                            <p class="gradient-text font-semibold mb-2 tracking-widest">OUR MISSION</p>
+                            <h2 class="section-title text-gray-900 dark:text-white mb-6">About MedClub</h2>
+                            <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">Founded in 2023, MedClub is a student-led organization dedicated to fostering a collaborative environment for individuals passionate about a career in medicine.</p>
+                            <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Our core mission is to bridge the gap between academic learning and practical application, empowering our members with the knowledge and confidence to excel.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Horizontal Scroll Section -->
+            <section id="horizontal-scroll-container" class="relative h-[250vh] bg-gradient-to-r from-sky-500 to-cyan-400 dark:bg-white">
+                <div class="sticky top-0 h-screen overflow-hidden">
+                    <div id="scroll-animation-wrapper" class="relative w-full h-full flex items-center">
+                        <div id="scroll-image-container" class="absolute top-0 left-0 w-[90%] h-full p-16">
+                             <img src="https://i.imgur.com/kp3yVNM.jpeg" alt="Medical professionals" class="w-full h-full object-cover rounded-2xl shadow-2xl">
+                        </div>
+                         <div id="scroll-text-content" class="absolute top-0 right-0 w-1/2 h-full flex items-center pr-16">
+                            <div>
+                                 <p class="font-semibold mb-2 tracking-widest text-white dark:gradient-text">COLLABORATION</p>
+                                <h2 class="section-title text-white dark:text-gray-900 mb-6">Driven by Connection</h2>
+                                <p class="text-gray-200 dark:text-gray-500 leading-relaxed">We believe that the future of medicine lies in collaborative innovation. Our community brings together bright minds from diverse backgrounds to share knowledge, challenge conventions, and push the boundaries of what's possible in healthcare.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What We Offer Section -->
+            <section id="offerings" class="py-24 bg-gray-50 dark:bg-[#1a1a1a]">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
+                        <p class="gradient-text font-semibold mb-2 tracking-widest">WHAT WE OFFER</p>
+                        <h2 class="section-title text-gray-900 dark:text-white">A Community to Help You Grow</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up">
+                            <div class="gradient-text text-4xl mb-6"><i class="fas fa-network-wired"></i></div>
+                            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Networking Events</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Connect with peers, alumni, and established medical professionals to build lasting relationships.</p>
+                        </div>
+                        <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up" style="transition-delay: 200ms;">
+                            <div class="gradient-text text-4xl mb-6"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Skill Workshops</h3>
+                            <p class="text-gray-500 dark:text-gray-400">From suturing clinics to MCAT prep, participate in hands-on sessions designed to give you an edge.</p>
+                        </div>
+                        <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up" style="transition-delay: 400ms;">
+                            <div class="gradient-text text-4xl mb-6"><i class="fas fa-user-md"></i></div>
+                            <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Mentorship Program</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Get paired with experienced mentors who can provide guidance, support, and invaluable advice.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Events Section -->
+            <section id="events" class="py-24 fade-in-up">
+                <div class="container mx-auto px-6">
+                    <div class="text-center max-w-2xl mx-auto mb-16">
+                        <p class="gradient-text font-semibold mb-2 tracking-widest">UPCOMING EVENTS</p>
+                        <h2 class="section-title text-gray-900 dark:text-white">Join Us & Learn</h2>
+                    </div>
+                    <div class="space-y-6 max-w-3xl mx-auto">
+                        <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 dark:border-gray-800 py-6">
+                            <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">September 15, 2024</p>
+                            <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Annual Welcome Mixer</h3>
+                            <a href="#" class="mt-4 md:mt-0 border border-sky-500 text-sky-500 font-semibold px-6 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">RSVP</a>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 dark:border-gray-800 py-6">
+                            <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">October 4, 2024</p>
+                            <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Suturing Workshop</h3>
+                            <a href="#" class="mt-4 md:mt-0 border border-sky-500 text-sky-500 font-semibold px-6 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">Register</a>
+                        </div>
+                        <div class="flex flex-col md:flex-row justify-between items-center border-t border-b border-gray-200 dark:border-gray-800 py-6">
+                            <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">November 10, 2024</p>
+                            <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Guest Speaker: A Surgeon's Life</h3>
+                            <p class="text-gray-500">Details Soon</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Join Us Section -->
+            <section id="join" class="py-24 bg-gray-50 dark:bg-[#1a1a1a] fade-in-up">
+               <div class="container mx-auto px-6">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                         <p class="gradient-text font-semibold mb-2 tracking-widest">BECOME A MEMBER</p>
+                        <h2 class="section-title text-gray-900 dark:text-white">Ready to Join MedClub?</h2>
+                        <p class="text-gray-500 dark:text-gray-400 mt-4">Take the next step in your medical journey. Fill out the form to get in touch.</p>
+                    </div>
+                    <form id="join-form" class="max-w-xl mx-auto">
+                        <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY">
+                        <input type="hidden" name="subject" value="New Membership Inquiry from MedClub Website">
+                        <input type="hidden" name="from_name" value="MedClub Website">
+                        <div id="form-content">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <input type="text" id="name" name="name" placeholder="Full Name" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                                <input type="email" id="email" name="email" placeholder="Email Address" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
+                            </div>
+                            <div class="mb-6">
+                                <textarea id="message" name="message" rows="4" placeholder="Your message (Optional)" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-full hover:bg-sky-600 transition duration-300">Send Inquiry</button>
+                        </div>
+                        <div id="form-success" class="hidden text-center">
+                            <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Inquiry Sent!</h3>
+                            <p class="text-gray-500 dark:text-gray-400">Thank you! We'll be in touch shortly.</p>
+                        </div>
+                    </form>
+                </div>
+            </section>
         </div>
-    </header>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="relative h-screen flex items-center justify-center text-center bg-white dark:bg-transparent">
-            <canvas id="particle-canvas" class="absolute top-0 left-0 w-full h-full"></canvas>
-            <div class="relative z-10 p-6">
-                <h1 class="text-5xl md:text-8xl font-extrabold text-gray-900 dark:text-white leading-tight">Innovating the Future of Medicine.</h1>
-                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mt-6">Welcome to MedClub, the premier community for aspiring medical professionals. We connect, educate, and inspire.</p>
-            </div>
-        </section>
-
-        <!-- About Us Section -->
-        <section id="about" class="py-24">
-            <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <div class="fade-in-up">
-                        <img src="https://placehold.co/600x700/e0f2fe/0ea5e9?text=Community" alt="MedClub members collaborating" class="rounded-lg shadow-xl w-full">
-                    </div>
-                    <div class="md:pl-10 fade-in-up" style="transition-delay: 200ms;">
-                        <p class="gradient-text font-semibold mb-2 tracking-widest">OUR MISSION</p>
-                        <h2 class="section-title text-gray-900 dark:text-white mb-6">About MedClub</h2>
-                        <p class="text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">Founded in 2023, MedClub is a student-led organization dedicated to fostering a collaborative environment for individuals passionate about a career in medicine.</p>
-                        <p class="text-gray-500 dark:text-gray-400 leading-relaxed">Our core mission is to bridge the gap between academic learning and practical application, empowering our members with the knowledge and confidence to excel.</p>
-                    </div>
+        <!-- Footer -->
+        <footer class="text-gray-500 dark:text-gray-400">
+            <div class="container mx-auto px-6 py-12">
+                 <div class="text-center text-xs mt-12 border-t border-gray-200 dark:border-gray-800 pt-8">
+                    &copy; <span id="year"></span> MedClub. All Rights Reserved.
                 </div>
             </div>
-        </section>
-        
-        <!-- Horizontal Scroll Section -->
-        <section id="horizontal-scroll-container" class="relative h-[250vh] bg-gradient-to-r from-sky-500 to-cyan-400 dark:bg-none dark:bg-white">
-            <div class="sticky top-0 h-screen overflow-hidden">
-                <div id="scroll-animation-wrapper" class="relative w-full h-full flex items-center">
-                    <div id="scroll-image-container" class="absolute top-0 left-0 w-[90%] h-full p-16">
-                         <img src="https://i.imgur.com/kp3yVNM.jpeg" alt="Medical professionals" class="w-full h-full object-cover rounded-2xl shadow-2xl">
-                    </div>
-                     <div id="scroll-text-content" class="absolute top-0 right-0 w-1/2 h-full flex items-center pr-16">
-                        <div>
-                             <p class="font-semibold mb-2 tracking-widest text-white dark:gradient-text">COLLABORATION</p>
-                            <h2 class="section-title text-white dark:text-gray-900 mb-6">Driven by Connection</h2>
-                            <p class="text-gray-200 dark:text-gray-500 leading-relaxed">We believe that the future of medicine lies in collaborative innovation. Our community brings together bright minds from diverse backgrounds to share knowledge, challenge conventions, and push the boundaries of what's possible in healthcare.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- What We Offer Section -->
-        <section id="offerings" class="py-24 bg-gray-50 dark:bg-[#1a1a1a]">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-16 fade-in-up">
-                    <p class="gradient-text font-semibold mb-2 tracking-widest">WHAT WE OFFER</p>
-                    <h2 class="section-title text-gray-900 dark:text-white">A Community to Help You Grow</h2>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up">
-                        <div class="gradient-text text-4xl mb-6"><i class="fas fa-network-wired"></i></div>
-                        <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Networking Events</h3>
-                        <p class="text-gray-500 dark:text-gray-400">Connect with peers, alumni, and established medical professionals to build lasting relationships.</p>
-                    </div>
-                    <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up" style="transition-delay: 200ms;">
-                        <div class="gradient-text text-4xl mb-6"><i class="fas fa-chalkboard-teacher"></i></div>
-                        <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Skill Workshops</h3>
-                        <p class="text-gray-500 dark:text-gray-400">From suturing clinics to MCAT prep, participate in hands-on sessions designed to give you an edge.</p>
-                    </div>
-                    <div class="offering-card bg-white dark:bg-[#222] border border-gray-200 dark:border-gray-700 p-8 rounded-lg transition-all duration-300 fade-in-up" style="transition-delay: 400ms;">
-                        <div class="gradient-text text-4xl mb-6"><i class="fas fa-user-md"></i></div>
-                        <h3 class="text-gray-900 dark:text-white text-2xl font-bold mb-3">Mentorship Program</h3>
-                        <p class="text-gray-500 dark:text-gray-400">Get paired with experienced mentors who can provide guidance, support, and invaluable advice.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Events Section -->
-        <section id="events" class="py-24 fade-in-up">
-            <div class="container mx-auto px-6">
-                <div class="text-center max-w-2xl mx-auto mb-16">
-                    <p class="gradient-text font-semibold mb-2 tracking-widest">UPCOMING EVENTS</p>
-                    <h2 class="section-title text-gray-900 dark:text-white">Join Us & Learn</h2>
-                </div>
-                <div class="space-y-6 max-w-3xl mx-auto">
-                    <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 dark:border-gray-800 py-6">
-                        <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">September 15, 2024</p>
-                        <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Annual Welcome Mixer</h3>
-                        <a href="#" class="mt-4 md:mt-0 border border-sky-500 text-sky-500 font-semibold px-6 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">RSVP</a>
-                    </div>
-                    <div class="flex flex-col md:flex-row justify-between items-center border-t border-gray-200 dark:border-gray-800 py-6">
-                        <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">October 4, 2024</p>
-                        <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Suturing Workshop</h3>
-                        <a href="#" class="mt-4 md:mt-0 border border-sky-500 text-sky-500 font-semibold px-6 py-2 rounded-full hover:bg-sky-500 hover:text-white transition duration-300">Register</a>
-                    </div>
-                    <div class="flex flex-col md:flex-row justify-between items-center border-t border-b border-gray-200 dark:border-gray-800 py-6">
-                        <p class="font-semibold text-gray-500 dark:text-gray-400 mb-2 md:mb-0">November 10, 2024</p>
-                        <h3 class="text-gray-800 dark:text-white text-xl font-bold text-center">Guest Speaker: A Surgeon's Life</h3>
-                        <p class="text-gray-500">Details Soon</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Join Us Section -->
-        <section id="join" class="py-24 bg-gray-50 dark:bg-[#1a1a1a] fade-in-up">
-           <div class="container mx-auto px-6">
-                <div class="text-center max-w-2xl mx-auto mb-12">
-                     <p class="gradient-text font-semibold mb-2 tracking-widest">BECOME A MEMBER</p>
-                    <h2 class="section-title text-gray-900 dark:text-white">Ready to Join MedClub?</h2>
-                    <p class="text-gray-500 dark:text-gray-400 mt-4">Take the next step in your medical journey. Fill out the form to get in touch.</p>
-                </div>
-                <form id="join-form" action="https://api.web3forms.com/submit" method="POST" class="max-w-xl mx-auto">
-                    <input type="hidden" name="access_key" value="REPLACE_WITH_YOUR_WEB3FORMS_ACCESS_KEY">
-                    <input type="hidden" name="subject" value="New Membership Inquiry from MedClub Website">
-                    <input type="hidden" name="from_name" value="MedClub Website">
-                    <div id="form-content">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                            <input type="text" id="name" name="name" placeholder="Full Name" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
-                            <input type="email" id="email" name="email" placeholder="Email Address" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500" required>
-                        </div>
-                        <div class="mb-6">
-                            <textarea id="message" name="message" rows="4" placeholder="Your message (Optional)" class="w-full bg-white dark:bg-gray-800 text-gray-800 dark:text-white px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-500"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-full hover:bg-sky-600 transition duration-300">Send Inquiry</button>
-                    </div>
-                    <div id="form-success" class="hidden text-center">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-white">Inquiry Sent!</h3>
-                        <p class="text-gray-500 dark:text-gray-400">Thank you! We'll be in touch shortly.</p>
-                    </div>
-                </form>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="text-gray-500 dark:text-gray-400">
-        <div class="container mx-auto px-6 py-12">
-             <div class="text-center text-xs mt-12 border-t border-gray-200 dark:border-gray-800 pt-8">
-                &copy; <span id="year"></span> MedClub. All Rights Reserved.
-            </div>
-        </div>
-    </footer>
+        </footer>
 
     <script>
+        // ** FULL SCRIPT, CORRECTED AND COMPLETE **
+        
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -279,12 +331,10 @@
             document.getElementById('cart-count').textContent = totalItems;
         };
         
-        // --- Full Script, Corrected ---
-        
         const themeToggleBtn = document.getElementById('theme-toggle');
         const darkIcon = document.getElementById('theme-toggle-dark-icon');
         const lightIcon = document.getElementById('theme-toggle-light-icon');
-
+        
         const applyTheme = () => {
             if (localStorage.getItem('color-theme') === 'dark') {
                 document.documentElement.classList.add('dark');
@@ -297,15 +347,13 @@
             }
         };
 
-        // Run on initial load
-        applyTheme();
-        updateCartCount();
-
         themeToggleBtn.addEventListener('click', function() {
             const isDark = document.documentElement.classList.contains('dark');
             localStorage.setItem('color-theme', isDark ? 'light' : 'dark');
             applyTheme();
-            initParticles();
+            if (typeof initParticles === 'function') {
+                initParticles();
+            }
         });
         
         const cursor = document.getElementById('cursor');
@@ -319,8 +367,10 @@
         });
 
         const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+        let ctx, particles = [];
+        if (canvas) {
+           ctx = canvas.getContext('2d');
+        }
         
         class Particle {
             constructor(x, y, directionX, directionY, size, color) {
@@ -343,6 +393,7 @@
         }
         
         function initParticles() {
+            if (!canvas) return;
             particles = [];
             let numberOfParticles = (canvas.height * canvas.width) / 9000;
             const isDark = document.documentElement.classList.contains('dark');
@@ -378,6 +429,7 @@
         }
         
         function animateParticles() {
+            if(!canvas) return;
             requestAnimationFrame(animateParticles);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particles.length; i++) {
@@ -387,17 +439,12 @@
         }
 
         function resizeCanvas() {
+            if(!canvas) return;
             canvas.width = window.innerWidth;
             canvas.height = canvas.parentElement.offsetHeight;
             initParticles();
         }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        animateParticles();
         
-        const joinForm = document.getElementById('join-form');
-        // Add form logic here if needed in the future
-
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -405,19 +452,69 @@
                 }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
         
         const scrollContainer = document.getElementById('horizontal-scroll-container');
         const animationWrapper = document.getElementById('scroll-animation-wrapper');
         
         window.addEventListener('scroll', () => {
-            const { top } = scrollContainer.getBoundingClientRect();
-            const scrollableHeight = scrollContainer.offsetHeight - window.innerHeight;
-            
-            let progress = -top / scrollableHeight;
-            progress = Math.max(0, Math.min(1, progress));
+            if(scrollContainer) {
+                const { top } = scrollContainer.getBoundingClientRect();
+                const scrollableHeight = scrollContainer.offsetHeight - window.innerHeight;
+                let progress = -top / scrollableHeight;
+                progress = Math.max(0, Math.min(1, progress));
+                animationWrapper.style.setProperty('--progress', progress);
+            }
+        });
 
-            animationWrapper.style.setProperty('--progress', progress);
+        // --- Opener Logic ---
+        const opener = document.getElementById('opener');
+        const pageWrapper = document.getElementById('page-wrapper');
+        const headerLogo = document.getElementById('header-logo');
+        const openerChars = document.querySelectorAll('.opener-char');
+
+        function startOpener() {
+            openerChars.forEach((char, index) => {
+                setTimeout(() => {
+                    char.classList.add('visible');
+                }, index * 100);
+            });
+            setTimeout(transformLogo, 1500);
+        }
+
+        function transformLogo() {
+            const targetLogoRect = headerLogo.getBoundingClientRect();
+            const openerContainer = document.getElementById('opener-container');
+            const containerRect = openerContainer.getBoundingClientRect();
+
+            openerChars.forEach(char => {
+                char.style.transition = 'transform 1s cubic-bezier(0.86, 0, 0.07, 1), opacity 0.5s ease';
+                
+                const targetX = targetLogoRect.left - containerRect.left + (targetLogoRect.width / 2) - (char.offsetWidth / 2);
+                const targetY = targetLogoRect.top - containerRect.top + (targetLogoRect.height / 2) - (char.offsetHeight / 2);
+                
+                char.style.transform = `translate(${targetX}px, ${targetY}px) scale(0.1)`;
+                char.style.opacity = 0;
+            });
+            
+            setTimeout(() => {
+                opener.style.opacity = 0;
+                pageWrapper.style.opacity = 1;
+                headerLogo.style.opacity = 1;
+                document.body.style.overflow = 'auto';
+                setTimeout(() => {
+                    opener.style.display = 'none';
+                }, 1000);
+            }, 800);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.overflow = 'hidden';
+            updateCartCount();
+            applyTheme();
+            startOpener();
+            resizeCanvas();
+            animateParticles();
+            document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
         });
     </script>
 </body>
