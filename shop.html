@@ -143,7 +143,7 @@
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-white shadow-lg rounded-b-lg">
             <a href="index.html#about" class="block py-2 text-gray-600 hover:text-sky-500">About Us</a>
             <a href="index.html#offerings" class="block py-2 text-gray-600 hover:text-sky-500">What We Offer</a>
             <a href="index.html#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
@@ -213,7 +213,6 @@
             document.getElementById('cart-count').textContent = totalItems;
         };
         
-        // --- Radial Pixel Fade Transition Script (2s) ---
         const retroOpener = document.getElementById('retro-opener');
         const retroText = document.getElementById('retro-text');
         const cursor = document.getElementById('cursor');
@@ -225,12 +224,12 @@
                 if (charIndex < textToType.length) {
                     retroText.textContent += textToType.charAt(charIndex);
                     charIndex++;
-                    setTimeout(typeChar, 80); // Faster typing
+                    setTimeout(typeChar, 100); 
                 } else {
                     cursor.style.animation = 'none';
                     cursor.style.color = '#ffffff';
                     
-                    setTimeout(startPixelFade, 100); // Shorter hold
+                    setTimeout(startPixelFade, 100); 
                 }
             }
             typeChar();
@@ -252,7 +251,7 @@
                 const col = i % numCols;
                 const distance = Math.sqrt(Math.pow(col - centerX, 2) + Math.pow(row - centerY, 2));
                 
-                const delay = (distance / maxDist) * 0.5; // Faster fade spread
+                const delay = (distance / maxDist) * 0.5; 
                 
                 block.style.animationDelay = `${delay}s`;
                 block.classList.add('animate-fade');
@@ -260,7 +259,7 @@
 
             setTimeout(() => {
                 retroOpener.classList.add('hidden');
-            }, 1000); // Shorter hide timeout
+            }, 1000); 
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -274,7 +273,6 @@
                 blocksOverlay.appendChild(block);
             }
 
-            // Total Timing: 0.1s (start) + 0.8s (typing) + 0.1s (hold) + ~1.0s (fade) = ~2.0s
             setTimeout(startTypewriter, 100); 
         });
     </script>
