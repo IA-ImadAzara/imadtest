@@ -7,7 +7,6 @@
     <!-- Favicon Link -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/P4COQcz.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Added configuration script to help stabilize Tailwind CSS -->
     <script>
         tailwind.config = {
             theme: {
@@ -29,8 +28,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        /* --- Pixel Fade Transition Opener Styles --- */
         #retro-opener {
             position: fixed;
             top: 0;
@@ -53,7 +50,7 @@
             opacity: 0;
             animation: content-fade-in 0.5s forwards;
             position: relative;
-            z-index: 2; /* Content above blocks */
+            z-index: 2;
         }
         #opener-logo {
             width: 180px; 
@@ -71,8 +68,6 @@
         .blinking-cursor {
             animation: blink 1s step-end infinite;
         }
-        
-        /* Blocks Overlay for Pixel Fade */
         #blocks-overlay {
             position: absolute;
             top: 0; left: 0;
@@ -89,8 +84,6 @@
         .block.animate-fade {
             animation: pixel-fade-out 0.8s ease-in forwards;
         }
-
-        /* Keyframe Animations */
         @keyframes content-fade-in {
             to { opacity: 1; }
         }
