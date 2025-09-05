@@ -203,7 +203,7 @@
             </section>
             
             <!-- Horizontal Scroll Section -->
-            <section id="horizontal-scroll-container" class="relative h-[250vh] bg-gradient-to-r from-sky-500 to-cyan-400 dark:bg-white">
+            <section id="horizontal-scroll-container" class="relative h-[250vh] bg-gradient-to-r from-sky-500 to-cyan-400 dark:bg-none dark:bg-white">
                 <div class="sticky top-0 h-screen overflow-hidden">
                     <div id="scroll-animation-wrapper" class="relative w-full h-full flex items-center">
                         <div id="scroll-image-container" class="absolute top-0 left-0 w-[90%] h-full p-16">
@@ -315,8 +315,6 @@
         </footer>
 
     <script>
-        // ** FULL SCRIPT, CORRECTED AND COMPLETE **
-        
         document.getElementById('year').textContent = new Date().getFullYear();
 
         const mobileMenuButton = document.getElementById('mobile-menu-button');
@@ -410,6 +408,7 @@
         }
         
         function connectParticles() {
+            if(!canvas) return;
             let opacityValue = 1;
             for (let a = 0; a < particles.length; a++) {
                 for (let b = a; b < particles.length; b++) {
