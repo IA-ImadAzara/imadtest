@@ -7,89 +7,114 @@
     <!-- Favicon Link -->
     <link rel="icon" type="image/png" href="https://i.imgur.com/P4COQcz.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            overflow-x: hidden; /* Prevent horizontal scroll during animation */
+            overflow-x: hidden; 
         }
         .gradient-text {
-            background: linear-gradient(to right, #0ea5e9, #22d3ee); /* sky-500 to cyan-400 */
+            background: linear-gradient(to right, #0ea5e9, #22d3ee);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        /* --- New Streetwear Opener Styles --- */
-        #shop-opener {
+        /* --- Pixel Fade Transition Opener Styles --- */
+        #retro-opener {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
             z-index: 10000;
-            pointer-events: none; /* Allows clicks to go through after animation */
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
         }
-        .opener-panel {
-            position: absolute;
-            top: 0;
-            width: 50.5%; /* Slight overlap to prevent gap */
-            height: 100%;
-            background-color: #111827; /* A dark charcoal/black */
-            animation-duration: 2.5s;
-            animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1); /* Smooth ease */
-            animation-fill-mode: forwards;
+        #retro-opener.hidden {
+            display: none;
         }
-        #opener-left {
-            left: 0;
-            animation-name: slide-in-out-left;
-        }
-        #opener-right {
-            right: 0;
-            animation-name: slide-in-out-right;
-        }
-        #opener-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
+        #opener-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             opacity: 0;
-            animation: fade-in-out 2.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+            animation: content-fade-in 0.5s forwards;
+            position: relative;
+            z-index: 2; /* Content above blocks */
+        }
+        #opener-logo {
+            width: 180px; 
+            height: auto;
+            margin-bottom: 2.5rem;
+            filter: brightness(0) invert(1);
+            animation: logo-glitch 1.5s forwards; 
+        }
+        #retro-text-container {
+            font-family: 'Press Start 2P', cursive;
+            color: #ffffff;
+            font-size: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        .blinking-cursor {
+            animation: blink 1s step-end infinite;
+        }
+        
+        /* Blocks Overlay for Pixel Fade */
+        #blocks-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: grid;
+            grid-template-columns: repeat(20, 1fr); 
+            grid-template-rows: repeat(12, 1fr);
+            z-index: 1;
+        }
+        .block {
+            background: linear-gradient(to right, #0ea5e9, #22d3ee);
+            opacity: 1;
+        }
+        .block.animate-fade {
+            animation: pixel-fade-out 0.8s ease-in forwards;
         }
 
         /* Keyframe Animations */
-        @keyframes slide-in-out-left {
-            0% { transform: translateX(-100%); }
-            25%, 65% { transform: translateX(0%); }
-            100% { transform: translateX(-100%); }
+        @keyframes content-fade-in {
+            to { opacity: 1; }
         }
-        @keyframes slide-in-out-right {
-            0% { transform: translateX(100%); }
-            25%, 65% { transform: translateX(0%); }
-            100% { transform: translateX(100%); }
+        @keyframes logo-glitch {
+            0% { image-rendering: auto; transform: scale(1); }
+            5% { image-rendering: pixelated; transform: scale(1.02); }
+            10% { image-rendering: auto; transform: scale(1); }
+            15% { image-rendering: pixelated; transform: scale(0.98); }
+            20% { image-rendering: auto; transform: scale(1); }
+            25% { image-rendering: pixelated; transform: scale(1.01); }
+            30% { image-rendering: auto; transform: scale(1); }
+            100% { image-rendering: auto; }
         }
-        @keyframes fade-in-out {
-            0%, 100% { opacity: 0; }
-            30%, 60% { opacity: 1; }
+        @keyframes blink {
+            from, to { color: transparent; }
+            50% { color: #ffffff; }
         }
-        .hidden-opener {
-            display: none;
+        @keyframes pixel-fade-out {
+            to { opacity: 0; }
         }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <!-- New Streetwear Opener -->
-    <div id="shop-opener">
-        <div id="opener-text">MedClub</div>
-        <div id="opener-left" class="opener-panel"></div>
-        <div id="opener-right" class="opener-panel"></div>
+    <div id="retro-opener">
+        <div id="opener-content">
+            <img id="opener-logo" src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo">
+            <div id="retro-text-container">
+                <span id="retro-text"></span><span id="cursor" class="blinking-cursor">_</span>
+            </div>
+        </div>
+        <div id="blocks-overlay"></div>
     </div>
 
     <!-- Header & Navigation -->
@@ -132,21 +157,15 @@
         <div class="container mx-auto px-6 text-center">
             <h1 class="text-3xl font-bold text-gray-900 mb-12">Club Merchandise</h1>
             
-            <!-- Centering container -->
             <div class="flex justify-center">
-
-                <!-- Product Card: Constrained width, responsive -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-sm w-full">
-                    
                     <img src="https://i.imgur.com/qb4PxM3.jpeg" alt="MedClub T-Shirt" class="w-full h-auto object-cover">
-                    
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
                         <p class="text-gray-600 mb-4">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
                         <p class="text-2xl font-bold gradient-text mb-6">$25.00</p>
                         <a href="product-tshirt.html" class="inline-block w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition duration-300">View Details</a>
                     </div>
-
                 </div>
             </div>
 
@@ -180,32 +199,84 @@
     </footer>
 
     <script>
-        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Cart count updater
         const updateCartCount = () => {
             const cart = JSON.parse(sessionStorage.getItem('medclubCart') || '[]');
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
             document.getElementById('cart-count').textContent = totalItems;
         };
         
-        // --- New Opener Script ---
-        const shopOpener = document.getElementById('shop-opener');
-        // Hide the opener after the animation is complete (2.5 seconds)
-        setTimeout(() => {
-            shopOpener.classList.add('hidden-opener');
-        }, 2500);
+        // --- Radial Pixel Fade Transition Script (2s) ---
+        const retroOpener = document.getElementById('retro-opener');
+        const retroText = document.getElementById('retro-text');
+        const cursor = document.getElementById('cursor');
+        const textToType = "OUR MERCH";
+        let charIndex = 0;
 
-        // Update cart count when the page loads
-        document.addEventListener('DOMContentLoaded', updateCartCount);
+        function startTypewriter() {
+            function typeChar() {
+                if (charIndex < textToType.length) {
+                    retroText.textContent += textToType.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(typeChar, 80); // Faster typing
+                } else {
+                    cursor.style.animation = 'none';
+                    cursor.style.color = '#ffffff';
+                    
+                    setTimeout(startPixelFade, 100); // Shorter hold
+                }
+            }
+            typeChar();
+        }
+
+        function startPixelFade() {
+            const blocksOverlay = document.getElementById('blocks-overlay');
+            const blocks = blocksOverlay.querySelectorAll('.block');
+            document.getElementById('opener-content').style.display = 'none';
+
+            const numCols = 20;
+            const numRows = 12;
+            const centerX = numCols / 2;
+            const centerY = numRows / 2;
+            const maxDist = Math.sqrt(Math.pow(centerX, 2) + Math.pow(centerY, 2));
+
+            blocks.forEach((block, i) => {
+                const row = Math.floor(i / numCols);
+                const col = i % numCols;
+                const distance = Math.sqrt(Math.pow(col - centerX, 2) + Math.pow(row - centerY, 2));
+                
+                const delay = (distance / maxDist) * 0.5; // Faster fade spread
+                
+                block.style.animationDelay = `${delay}s`;
+                block.classList.add('animate-fade');
+            });
+
+            setTimeout(() => {
+                retroOpener.classList.add('hidden');
+            }, 1000); // Shorter hide timeout
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+            
+            const blocksOverlay = document.getElementById('blocks-overlay');
+            const numBlocks = 20 * 12;
+            for (let i = 0; i < numBlocks; i++) {
+                const block = document.createElement('div');
+                block.classList.add('block');
+                blocksOverlay.appendChild(block);
+            }
+
+            // Total Timing: 0.1s (start) + 0.8s (typing) + 0.1s (hold) + ~1.0s (fade) = ~2.0s
+            setTimeout(startTypewriter, 100); 
+        });
     </script>
 </body>
 </html>
