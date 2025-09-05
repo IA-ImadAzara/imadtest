@@ -3,18 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shop - MedClub</title>
+    <title>MedClub Shop - Aspiring Medical Professionals</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-        }
-        .section-title {
-            font-weight: 800;
-            font-size: 2.25rem; /* 36px */
-            letter-spacing: -0.025em;
         }
         .gradient-text {
             background: linear-gradient(to right, #0ea5e9, #22d3ee); /* sky-500 to cyan-400 */
@@ -26,7 +21,7 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Header & Navigation -->
-     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="text-2xl font-bold text-gray-900">
                   <img src="https://i.imgur.com/P4COQcz.png" alt="MedClub Logo" class="h-10 w-auto">
@@ -57,31 +52,37 @@
             <a href="index.html#events" class="block py-2 text-gray-600 hover:text-sky-500">Events</a>
             <a href="index.html#team" class="block py-2 text-gray-600 hover:text-sky-500">Our Team</a>
             <a href="shop.html" class="block py-2 text-sky-500 font-semibold">Shop</a>
-             <a href="index.html#join" class="block py-2 mt-2 bg-sky-500 text-white text-center font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
+            <a href="index.html#join" class="block py-2 mt-2 bg-sky-500 text-white text-center font-semibold px-5 py-2 rounded-lg hover:bg-sky-600 transition duration-300 shadow-md">Join Us</a>
         </div>
     </header>
 
-    <main>
-        <!-- Shop Section -->
-        <section id="shop" class="py-20">
-            <div class="container mx-auto px-6 text-center">
-                <h2 class="section-title text-gray-900 mb-12">Club Merchandise</h2>
-                <div class="flex justify-center">
-                    <!-- Product 1 -->
-                    <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex flex-col max-w-sm">
-                        <img https://i.imgur.com/qb4PxM3.jpeg alt="MedClub T-Shirt" class="w-full h-56 object-cover">
-                        <div class="p-6 flex-grow flex flex-col">
-                            <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
-                            <p class="text-gray-600 mb-4 flex-grow">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
-                            <p class="text-2xl font-bold gradient-text mb-4">$25.00</p>
-                            <a href="product-tshirt.html" class="mt-auto w-full bg-sky-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-sky-600 transition duration-300">View Details</a>
-                        </div>
+    <main class="py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h1 class="text-3xl font-bold text-gray-900 mb-12">Club Merchandise</h1>
+            
+            <!-- Centering container -->
+            <div class="flex justify-center">
+
+                <!-- Product Card: Constrained width, responsive -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-sm w-full">
+                    
+                    <!-- YOUR NEW IMAGE LINK IS HERE -->
+                    <img src="https://i.imgur.com/qb4PxM3.jpeg" alt="MedClub T-Shirt" class="w-full h-auto object-cover">
+                    
+                    <!-- Centered text content -->
+                    <div class="p-6 text-center">
+                        <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
+                        <p class="text-gray-600 mb-4">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
+                        <p class="text-2xl font-bold gradient-text mb-6">$25.00</p>
+                        <a href="product-tshirt.html" class="inline-block w-full bg-sky-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-sky-600 transition duration-300">View Details</a>
                     </div>
+
                 </div>
             </div>
-        </section>
+
+        </div>
     </main>
-    
+
     <!-- Footer -->
     <footer class="bg-gray-800 text-white">
         <div class="container mx-auto px-6 py-10">
@@ -109,25 +110,24 @@
     </footer>
 
     <script>
+        // Set current year in footer
         document.getElementById('year').textContent = new Date().getFullYear();
-        
+
+        // Mobile menu toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Update cart count on page load
-        const cartCountEl = document.getElementById('cart-count');
-        const getCart = () => {
-            const cart = sessionStorage.getItem('medclubCart');
-            return cart ? JSON.parse(cart) : [];
-        };
+        // Cart count updater
         const updateCartCount = () => {
-            const cart = getCart();
+            const cart = JSON.parse(sessionStorage.getItem('medclubCart') || '[]');
             const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
-            cartCountEl.textContent = totalItems;
+            document.getElementById('cart-count').textContent = totalItems;
         };
+        
+        // Update cart count when the page loads
         document.addEventListener('DOMContentLoaded', updateCartCount);
     </script>
 </body>
