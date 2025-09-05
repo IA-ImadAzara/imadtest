@@ -77,13 +77,15 @@
             grid-template-rows: repeat(12, 1fr);
             z-index: 1;
         }
-        .block {
-            background: linear-gradient(to right, #0ea5e9, #22d3ee);
-            opacity: 1;
-        }
-        .block.animate-fade {
-            animation: pixel-fade-out 0.8s ease-in forwards;
-        }
+        /* scope the pixel blocks to the opener overlay only */
+#blocks-overlay .block {
+    background: linear-gradient(to right, #0ea5e9, #22d3ee);
+    opacity: 1;
+}
+#blocks-overlay .block.animate-fade {
+    animation: pixel-fade-out 0.8s ease-in forwards;
+}
+
         @keyframes content-fade-in {
             to { opacity: 1; }
         }
