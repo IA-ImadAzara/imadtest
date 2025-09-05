@@ -12,15 +12,85 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
+            overflow-x: hidden; /* Prevent horizontal scroll during animation */
         }
         .gradient-text {
             background: linear-gradient(to right, #0ea5e9, #22d3ee); /* sky-500 to cyan-400 */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* --- New Streetwear Opener Styles --- */
+        #shop-opener {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 10000;
+            pointer-events: none; /* Allows clicks to go through after animation */
+            overflow: hidden;
+        }
+        .opener-panel {
+            position: absolute;
+            top: 0;
+            width: 50.5%; /* Slight overlap to prevent gap */
+            height: 100%;
+            background-color: #111827; /* A dark charcoal/black */
+            animation-duration: 2.5s;
+            animation-timing-function: cubic-bezier(0.77, 0, 0.175, 1); /* Smooth ease */
+            animation-fill-mode: forwards;
+        }
+        #opener-left {
+            left: 0;
+            animation-name: slide-in-out-left;
+        }
+        #opener-right {
+            right: 0;
+            animation-name: slide-in-out-right;
+        }
+        #opener-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fade-in-out 2.5s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        /* Keyframe Animations */
+        @keyframes slide-in-out-left {
+            0% { transform: translateX(-100%); }
+            25%, 65% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+        @keyframes slide-in-out-right {
+            0% { transform: translateX(100%); }
+            25%, 65% { transform: translateX(0%); }
+            100% { transform: translateX(100%); }
+        }
+        @keyframes fade-in-out {
+            0%, 100% { opacity: 0; }
+            30%, 60% { opacity: 1; }
+        }
+        .hidden-opener {
+            display: none;
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
+
+    <!-- New Streetwear Opener -->
+    <div id="shop-opener">
+        <div id="opener-text">MedClub</div>
+        <div id="opener-left" class="opener-panel"></div>
+        <div id="opener-right" class="opener-panel"></div>
+    </div>
 
     <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
@@ -68,10 +138,8 @@
                 <!-- Product Card: Constrained width, responsive -->
                 <div class="bg-white rounded-2xl shadow-lg overflow-hidden max-w-sm w-full">
                     
-                    <!-- YOUR NEW IMAGE LINK IS HERE -->
                     <img src="https://i.imgur.com/qb4PxM3.jpeg" alt="MedClub T-Shirt" class="w-full h-auto object-cover">
                     
-                    <!-- Centered text content -->
                     <div class="p-6 text-center">
                         <h3 class="text-xl font-bold mb-2 text-gray-900">MedClub T-Shirt</h3>
                         <p class="text-gray-600 mb-4">High-quality cotton t-shirt with the official MedClub logo. Show your pride!</p>
@@ -129,6 +197,13 @@
             document.getElementById('cart-count').textContent = totalItems;
         };
         
+        // --- New Opener Script ---
+        const shopOpener = document.getElementById('shop-opener');
+        // Hide the opener after the animation is complete (2.5 seconds)
+        setTimeout(() => {
+            shopOpener.classList.add('hidden-opener');
+        }, 2500);
+
         // Update cart count when the page loads
         document.addEventListener('DOMContentLoaded', updateCartCount);
     </script>
